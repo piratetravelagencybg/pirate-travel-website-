@@ -15,8 +15,8 @@
 # vercel
 .vercel
 
-# old reference images (not used by site)
-images/
+# old reference images (not used by site) — root-level only
+/images/
 
 # misc
 .DS_Store
