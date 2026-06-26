@@ -252,46 +252,75 @@ export default async function HomePage() {
       <NewsletterBanner />
 
       {/* ── ЗАЩО ДА ИЗБЕРЕШ НАС ──────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-5 pb-16">
-        <div className="text-center mb-10">
-          <p
-            className="text-xs font-black uppercase tracking-[0.2em] mb-3"
-            style={{ color: "#D4A017" }}
-          >
+      <section className="max-w-6xl mx-auto px-5 pb-20 mt-6">
+        {/* Header */}
+        <div className="mb-12">
+          <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: "#D4A017" }}>
             Защо да избереш нас?
           </p>
-          <h2 className="text-2xl md:text-3xl font-black mb-4" style={{ color: "#111827" }}>
+          <h2 className="text-2xl md:text-3xl font-black leading-tight" style={{ color: "#111827" }}>
             Пътешествия, създадени за теб
           </h2>
-          {/* Gold underline */}
-          <div
-            className="mx-auto"
-            style={{
-              width: 48,
-              height: 3,
-              background: "linear-gradient(135deg, #C07810 0%, #F5C842 100%)",
-              borderRadius: 99,
-            }}
-          />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {WHY_US.map(({ Icon, title, desc }) => (
-            <div key={title} className="text-center">
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                style={{ background: "rgba(26,110,189,0.08)" }}
+        {/* Feature rows */}
+        <div className="flex flex-col gap-0">
+          {WHY_US.map(({ Icon, title, desc }, i) => (
+            <div
+              key={title}
+              className="group flex items-start gap-6 py-7 transition-colors duration-200"
+              style={{
+                borderTop: "1px solid #EBEBEB",
+                borderBottom: i === WHY_US.length - 1 ? "1px solid #EBEBEB" : "none",
+              }}
+            >
+              {/* Number */}
+              <span
+                className="font-black shrink-0 w-10 text-right leading-none mt-1"
+                style={{ fontSize: 13, color: "#D4A017", letterSpacing: "0.05em" }}
               >
-                <Icon className="w-6 h-6" style={{ color: "#1A6EBD" }} />
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              {/* Icon */}
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: "linear-gradient(135deg,#C07810,#F5C842)" }}
+              >
+                <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" style={{ color: "#071A2E" }} />
               </div>
-              <h3 className="font-black text-sm mb-2" style={{ color: "#111827" }}>
-                {title}
-              </h3>
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
-                {desc}
-              </p>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0">
+                <h3 className="font-black text-base mb-1" style={{ color: "#111827" }}>
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                  {desc}
+                </p>
+              </div>
+
+              {/* Arrow on hover */}
+              <ArrowRight
+                className="w-4 h-4 shrink-0 mt-1.5 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                style={{ color: "#D4A017" }}
+              />
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-10 flex items-center justify-between flex-wrap gap-4">
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Над <strong style={{ color: "#111827" }}>2300 доволни пътешественици</strong> вече ни се довериха.
+          </p>
+          <Link
+            href="/destinacii"
+            className="inline-flex items-center gap-2 font-black text-sm px-6 py-3 rounded-2xl transition-opacity hover:opacity-90"
+            style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+          >
+            Разгледай оферти <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
