@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import Image from "next/image";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import OfferCard from "@/components/OfferCard";
@@ -182,6 +183,67 @@ export default async function HomePage() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ЗА НАС TEASER ────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-5 mt-20">
+        <div className="grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden" style={{ boxShadow: "0 12px 48px rgba(7,26,46,0.12)" }}>
+
+          {/* Image */}
+          <div className="relative min-h-[300px] md:min-h-[420px]">
+            <Image
+              src="/images/agency-office.png"
+              alt="Pirate Travel Agency офис"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(7,26,46,0.3), rgba(7,26,46,0.1))" }} />
+            {/* Badge */}
+            <div
+              className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-xs font-black text-white"
+              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+            >
+              🏴‍☠️ От 2018 година
+            </div>
+          </div>
+
+          {/* Text */}
+          <div className="flex flex-col justify-center px-8 py-10 md:px-10" style={{ background: "#FFFFFF" }}>
+            <p className="text-xs font-black uppercase tracking-[0.18em] mb-3" style={{ color: "#D4A017" }}>
+              Кои сме ние
+            </p>
+            <h2 className="text-2xl md:text-3xl font-black mb-4 leading-tight" style={{ color: "#111827" }}>
+              Твоят надежден партньор за незабравими пътешествия
+            </h2>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+              Pirate Travel Agency е туристическа агенция от Благоевград с опит в организирането на групови екскурзии до Гърция, Турция, Сърбия и много други дестинации. Нашият екип се грижи за всеки детайл — от резервацията до прибирането у дома.
+            </p>
+
+            {/* Stats */}
+            <div className="flex gap-8 mb-8">
+              {[
+                { num: "2300+", label: "доволни клиенти" },
+                { num: "6+",    label: "години опит" },
+                { num: "30+",   label: "дестинации" },
+              ].map(({ num, label }) => (
+                <div key={label}>
+                  <p className="font-black text-xl" style={{ color: "#111827" }}>{num}</p>
+                  <p className="text-xs" style={{ color: "#9CA3AF" }}>{label}</p>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href="/za-nas"
+              className="inline-flex items-center gap-2 font-black text-sm px-6 py-3.5 rounded-2xl self-start transition-opacity hover:opacity-90"
+              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+            >
+              Научи повече за нас <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
