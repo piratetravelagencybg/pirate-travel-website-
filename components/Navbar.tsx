@@ -86,12 +86,12 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <Link href="/" className="shrink-0 leading-none mr-2">
+        <Link href="/" className="shrink-0 leading-none mr-2 text-center">
           <span className="block font-black text-[14px] tracking-[0.22em] uppercase" style={logoColor}>
             PIRATE
           </span>
           <span
-            className="block font-bold text-[8px] tracking-[0.5em] uppercase -mt-0.5"
+            className="block font-bold text-[8px] tracking-[0.38em] uppercase -mt-0.5"
             style={solid
               ? { background: "linear-gradient(135deg,#C07810,#F5C842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }
               : { color: "rgba(255,255,255,0.75)" }
