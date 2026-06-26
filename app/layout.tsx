@@ -91,7 +91,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen">
         <Navbar />
-        <main className="pt-16 pb-28 md:pb-0">{children}</main>
+        <main className="pt-20 pb-28 md:pb-0">{children}</main>
         <Footer />
         <BottomNav />
         <ChatBot />

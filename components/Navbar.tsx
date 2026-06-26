@@ -1,258 +1,203 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Phone, X, Menu } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
-const DESKTOP_LINKS = [
-  { href: "/destinacii",        label: "Дестинации", dropdown: true  },
-  { href: "/destinacii",        label: "Оферти",     dropdown: false },
-  { href: "/destinacii",        label: "Почивки",    dropdown: false },
-  { href: "/za-nas",            label: "За нас",     dropdown: false },
-  { href: "/za-nas",            label: "Блог",       dropdown: false },
-  { href: "/kontakti",          label: "Контакти",   dropdown: false },
+const NAV_LINKS = [
+  { href: "/destinacii",       label: "Дестинации" },
+  { href: "/destinacii",       label: "Оферти"     },
+  { href: "/za-nas",           label: "За нас"     },
+  { href: "/kontakti",         label: "Контакти"   },
 ];
 
-const DRAWER_LINKS = [
-  { href: "/",                   label: "Начало",             emoji: "🏠" },
-  { href: "/destinacii",         label: "Оферти",             emoji: "🌍" },
-  { href: "/personalni-oferti",  label: "Персонална оферта",  emoji: "✨" },
-  { href: "/za-nas",             label: "За нас",             emoji: "🏴‍☠️" },
-  { href: "/kontakti",           label: "Контакти",           emoji: "📞" },
+const MOBILE_LINKS = [
+  { href: "/",                  label: "Начало",            emoji: "🏠" },
+  { href: "/destinacii",        label: "Оферти",            emoji: "🌍" },
+  { href: "/personalni-oferti", label: "Персонална оферта", emoji: "✨" },
+  { href: "/za-nas",            label: "За нас",            emoji: "🏴‍☠️" },
+  { href: "/kontakti",          label: "Контакти",          emoji: "📞" },
 ];
 
 const goldGrad: React.CSSProperties = {
   background: "linear-gradient(135deg, #C07810 0%, #F5C842 100%)",
 };
 
-const goldText: React.CSSProperties = {
-  ...goldGrad,
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-};
-
 export default function Navbar() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
-  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const pathname        = usePathname();
+  const dropRef         = useRef<HTMLDivElement>(null);
 
-  const isHome = pathname === "/";
-  const solid  = scrolled || !isHome;
+  useEffect(() => { setOpen(false); }, [pathname]);
 
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
-
+  // Close dropdown when clicking outside
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const linkColor = solid ? "#1E4A7A" : "rgba(255,255,255,0.9)";
+    if (!open) return;
+    function handler(e: MouseEvent) {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   return (
-    <>
-      {/* ── HEADER BAR ──────────────────────────────── */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={solid ? {
-          background: "rgba(255,255,255,0.97)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(189,213,238,0.6)",
-          boxShadow: "0 4px 20px rgba(7,26,46,0.08)",
-        } : {}}
-      >
-        <div className="max-w-7xl mx-auto px-5 flex items-center h-16 gap-4">
-
-          {/* Logo */}
-          <Link href="/" className="shrink-0 leading-none">
-            <span
-              className="block font-black text-[15px] tracking-[0.2em] uppercase"
-              style={solid ? goldText : { color: "#FFFFFF" }}
-            >
-              PIRATE
-            </span>
-            <span
-              className="block font-bold text-[9px] tracking-[0.5em] uppercase -mt-0.5"
-              style={solid ? goldText : { color: "rgba(255,255,255,0.8)" }}
-            >
-              TRAVEL
-            </span>
-          </Link>
-
-          {/* Desktop center links */}
-          <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center">
-            {DESKTOP_LINKS.map(link => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="flex items-center gap-0.5 text-sm font-medium transition-colors duration-200"
-                style={{ color: linkColor }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#1A6EBD")}
-                onMouseLeave={e => (e.currentTarget.style.color = linkColor)}
-              >
-                {link.label}
-                {link.dropdown && (
-                  <ChevronDown className="w-3.5 h-3.5 opacity-70" />
-                )}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right: phone + hamburger */}
-          <div className="ml-auto flex items-center gap-3 shrink-0">
-            {/* Phone — desktop only */}
-            <div className="hidden lg:block text-right">
-              <div className="flex items-center justify-end gap-1.5">
-                <Phone
-                  className="w-3.5 h-3.5"
-                  style={{ color: solid ? "#1A6EBD" : "#F5C842" }}
-                />
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: solid ? "#0D2240" : "#FFFFFF" }}
-                >
-                  0877 121 209
-                </span>
-              </div>
-              <p
-                className="text-xs"
-                style={{ color: solid ? "#5A8AB0" : "rgba(255,255,255,0.6)" }}
-              >
-                Пон - Пет: 9:00 - 18:00
-              </p>
-            </div>
-
-            {/* Gold hamburger button */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              aria-label="Отвори меню"
-              className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-opacity hover:opacity-90"
-              style={goldGrad}
-            >
-              <Menu className="w-5 h-5" style={{ color: "#071A2E" }} />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* ── BACKDROP ────────────────────────────────── */}
+    <header
+      className="fixed z-50"
+      style={{
+        top: 14,
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(calc(100% - 24px), 1100px)",
+      }}
+    >
       <div
-        className="fixed inset-0 z-[59]"
-        aria-hidden="true"
+        className="flex items-center h-14 px-4 gap-3"
         style={{
-          background: "rgba(7,26,46,0.45)",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "all" : "none",
-          transition: "opacity 0.3s ease",
+          background: "rgba(255,255,255,0.96)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          borderRadius: 9999,
+          boxShadow: "0 4px 32px rgba(7,26,46,0.13), 0 1px 4px rgba(7,26,46,0.06)",
+          border: "1px solid rgba(189,213,238,0.55)",
         }}
-        onClick={() => setMenuOpen(false)}
-      />
-
-      {/* ── SLIDE-IN DRAWER ─────────────────────────── */}
-      <div
-        className="fixed top-0 right-0 bottom-0 z-[60] w-[300px] flex flex-col"
-        style={{
-          background: "#FFFFFF",
-          transform: menuOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-          boxShadow: menuOpen ? "-20px 0 60px rgba(7,26,46,0.18)" : "none",
-          willChange: "transform",
-        }}
-        aria-hidden={!menuOpen}
       >
-        {/* Drawer header */}
-        <div className="flex items-center justify-between px-5 pt-7 pb-5">
-          <div className="leading-none">
-            <span className="block font-black text-[15px] tracking-[0.2em] uppercase" style={goldText}>
-              PIRATE
-            </span>
-            <span className="block font-bold text-[9px] tracking-[0.5em] uppercase -mt-0.5" style={goldText}>
-              TRAVEL
-            </span>
-          </div>
-          <button
-            onClick={() => setMenuOpen(false)}
-            aria-label="Затвори меню"
-            className="w-10 h-10 rounded-full flex items-center justify-center"
-            style={{ background: "rgba(26,110,189,0.08)" }}
-          >
-            <X className="w-5 h-5" style={{ color: "#0D2240" }} />
-          </button>
-        </div>
+        {/* Logo */}
+        <Link href="/" className="shrink-0 leading-none mr-2">
+          <span
+            className="block font-black text-[14px] tracking-[0.22em] uppercase"
+            style={{
+              background: "linear-gradient(135deg,#C07810,#F5C842)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >PIRATE</span>
+          <span
+            className="block font-bold text-[8px] tracking-[0.5em] uppercase -mt-0.5"
+            style={{
+              background: "linear-gradient(135deg,#C07810,#F5C842)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >TRAVEL</span>
+        </Link>
 
-        {/* Divider */}
-        <div className="mx-5 mb-3" style={{ height: 1, background: "#BDD5EE" }} />
-
-        {/* Nav links with stagger animation */}
-        <nav className="flex-1 flex flex-col px-3 gap-0.5 py-2">
-          {DRAWER_LINKS.map((link, i) => {
+        {/* Desktop links */}
+        <nav className="hidden lg:flex items-center gap-1 flex-1">
+          {NAV_LINKS.map(link => {
             const active = pathname === link.href;
             return (
               <Link
-                key={link.href + link.label}
+                key={link.label}
                 href={link.href}
-                className="flex items-center gap-3 px-3 py-3.5 rounded-xl font-semibold text-[15px]"
+                className="px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
                 style={{
-                  color: active ? "#1A6EBD" : "#0D2240",
-                  background: active ? "rgba(26,110,189,0.07)" : "transparent",
-                  fontWeight: active ? 800 : 600,
-                  opacity: menuOpen ? 1 : 0,
-                  transform: menuOpen ? "translateX(0)" : "translateX(16px)",
-                  transition: `opacity 0.28s ease ${i * 45 + 80}ms, transform 0.28s ease ${i * 45 + 80}ms`,
+                  color:      active ? "#1A6EBD" : "#374151",
+                  background: active ? "rgba(26,110,189,0.08)" : "transparent",
+                  fontWeight: active ? 700 : 500,
+                }}
+                onMouseEnter={e => {
+                  if (!active) (e.currentTarget as HTMLElement).style.background = "rgba(26,110,189,0.06)";
+                }}
+                onMouseLeave={e => {
+                  if (!active) (e.currentTarget as HTMLElement).style.background = "transparent";
                 }}
               >
-                <span className="text-xl leading-none w-7 text-center">{link.emoji}</span>
-                <span className="flex-1">{link.label}</span>
-                {active && (
-                  <span
-                    className="w-1.5 h-1.5 rounded-full shrink-0"
-                    style={{ background: "#1A6EBD" }}
-                  />
-                )}
+                {link.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Divider */}
-        <div className="mx-5 mt-2 mb-4" style={{ height: 1, background: "#BDD5EE" }} />
+        {/* Spacer on mobile */}
+        <div className="flex-1 lg:hidden" />
 
-        {/* Bottom CTAs */}
-        <div
-          className="px-4 pb-10 flex flex-col gap-3"
-          style={{
-            opacity: menuOpen ? 1 : 0,
-            transform: menuOpen ? "translateY(0)" : "translateY(10px)",
-            transition: `opacity 0.28s ease ${DRAWER_LINKS.length * 45 + 100}ms, transform 0.28s ease ${DRAWER_LINKS.length * 45 + 100}ms`,
-          }}
+        {/* Phone — desktop */}
+        <a
+          href="tel:+359877121209"
+          className="hidden lg:flex items-center gap-1.5 text-sm font-semibold shrink-0 mr-1"
+          style={{ color: "#374151" }}
         >
-          <Link
-            href="/personalni-oferti"
-            className="font-black text-center py-4 rounded-2xl text-sm"
-            style={{ ...goldGrad, color: "#071A2E", boxShadow: "0 4px 16px rgba(232,160,32,0.3)" }}
+          <Phone className="w-3.5 h-3.5" style={{ color: "#D4A017" }} />
+          0877 121 209
+        </a>
+
+        {/* CTA button — desktop */}
+        <Link
+          href="/personalni-oferti"
+          className="hidden lg:block shrink-0 font-black text-[13px] px-5 py-2 rounded-full transition-opacity hover:opacity-90"
+          style={{ ...goldGrad, color: "#071A2E" }}
+        >
+          Запитване →
+        </Link>
+
+        {/* Hamburger — mobile & tablet (relative anchor for dropdown) */}
+        <div className="lg:hidden relative" ref={dropRef}>
+          <button
+            onClick={() => setOpen(!open)}
+            className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-opacity hover:opacity-90"
+            style={goldGrad}
+            aria-label="Меню"
           >
-            Запитване за оферта →
-          </Link>
-          <a
-            href="tel:+359877121209"
-            className="font-semibold text-center py-3.5 rounded-2xl text-sm border"
-            style={{ borderColor: "#BDD5EE", color: "#1E4A7A" }}
+            {open
+              ? <X    className="w-4 h-4" style={{ color: "#071A2E" }} />
+              : <Menu className="w-4 h-4" style={{ color: "#071A2E" }} />
+            }
+          </button>
+
+          {/* Floating dropdown */}
+          <div
+            className="absolute right-0 mt-3 w-56 overflow-hidden"
+            style={{
+              background: "#ffffff",
+              borderRadius: 20,
+              boxShadow: "0 16px 48px rgba(7,26,46,0.18)",
+              border: "1px solid rgba(189,213,238,0.5)",
+              transformOrigin: "top right",
+              transform: open ? "scale(1) translateY(0)" : "scale(0.92) translateY(-8px)",
+              opacity: open ? 1 : 0,
+              pointerEvents: open ? "all" : "none",
+              transition: "transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease",
+            }}
           >
-            📞 0877 121 209
-          </a>
+            <div className="p-2">
+              {MOBILE_LINKS.map(link => {
+                const active = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href + link.label}
+                    href={link.href}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+                    style={{
+                      color:      active ? "#1A6EBD" : "#111827",
+                      background: active ? "rgba(26,110,189,0.07)" : "transparent",
+                      fontWeight: active ? 700 : 500,
+                    }}
+                  >
+                    <span className="text-base">{link.emoji}</span>
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Bottom CTA */}
+            <div className="px-3 pb-3">
+              <Link
+                href="/personalni-oferti"
+                className="block font-black text-center text-sm py-3 rounded-2xl"
+                style={{ ...goldGrad, color: "#071A2E" }}
+              >
+                Запитване за оферта →
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </header>
   );
 }

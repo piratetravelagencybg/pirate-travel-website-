@@ -5,7 +5,7 @@ const AVATARS = ["#1A6EBD", "#2E7D32", "#C07810", "#7B1FA2"];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen -mt-16 flex flex-col justify-end pb-28 md:pb-36">
+    <section className="relative min-h-screen -mt-20 flex flex-col justify-end pb-28 md:pb-36">
       {/* Background */}
       <Image
         src="/images/hero.png"
