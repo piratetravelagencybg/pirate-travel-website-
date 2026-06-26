@@ -171,10 +171,10 @@ export default async function OfferDetailPage({
         </div>
       </div>
 
-      {/* Mobile sticky bar — bottom-[92px] clears the BottomNav pill (bottom-5 + 62px height) */}
+      {/* Mobile sticky bar — BottomNav is hidden on this page so we sit at bottom-0 */}
       <div
-        className="fixed left-0 right-0 z-30 md:hidden backdrop-blur-md px-4 py-3"
-        style={{ bottom: 92, background: "rgba(255,255,255,0.97)", borderTop: "1px solid #E5EFF8" }}
+        className="fixed bottom-0 left-0 right-0 z-30 md:hidden backdrop-blur-md px-4 py-4"
+        style={{ background: "rgba(255,255,255,0.97)", borderTop: "1px solid #E5EFF8" }}
       >
         <div className="flex items-center gap-3">
           <div>

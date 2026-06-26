@@ -15,12 +15,17 @@ export default function BottomNav() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
+  // Hide on offer detail pages — they have their own sticky price bar
+  const isOfferDetail = /^\/destinacii\/.+/.test(pathname);
+
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 120);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (isOfferDetail) return null;
 
   return (
     <nav
