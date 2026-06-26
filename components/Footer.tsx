@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { Facebook, Instagram, Phone, Mail, MapPin, Clock } from "lucide-react";
 
@@ -21,7 +22,7 @@ const SOCIAL = [
   { href: "https://www.instagram.com/piratetravelagency", Icon: Instagram, label: "Instagram" },
 ];
 
-const goldGrad: React.CSSProperties = {
+const goldGrad: CSSProperties = {
   background: "linear-gradient(135deg,#C07810,#F5C842)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
