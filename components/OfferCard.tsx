@@ -66,45 +66,45 @@ export default function OfferCard({ offer }: { offer: Offer }) {
       </div>
 
       {/* ── CONTENT ────────────────────────────────────────── */}
-      <div className="p-4">
+      <div className="p-3 md:p-4">
         {/* City name */}
-        <h3 className="font-black text-xl mb-1.5 leading-tight" style={{ color: "#111827" }}>
+        <h3 className="font-black text-lg md:text-xl mb-1 leading-tight truncate" style={{ color: "#111827" }}>
           {offer.destination}
         </h3>
 
-        {/* Nights • Transport */}
+        {/* Nights • Transport — single line, truncate-safe */}
         {nights > 0 && (
-          <div className="flex items-center gap-1.5 mb-2" style={{ color: "#6B7280" }}>
-            <Moon className="w-3.5 h-3.5" />
-            <span className="text-sm">{nights} нощувки</span>
-            <span className="mx-0.5 opacity-40">•</span>
-            {tIcon}
-            <span className="text-sm">{transport}</span>
+          <div className="flex items-center gap-1 mb-2 min-w-0" style={{ color: "#6B7280" }}>
+            <Moon className="w-3 h-3 shrink-0" />
+            <span className="text-xs shrink-0 whitespace-nowrap">{nights} нощувки</span>
+            <span className="opacity-40 shrink-0">·</span>
+            <span className="shrink-0 flex items-center">{tIcon}</span>
+            <span className="text-xs truncate">{transport}</span>
           </div>
         )}
 
         {/* Stars */}
-        <div className="flex items-center gap-1.5 mb-3">
-          <span style={{ color: "#F59E0B", fontSize: 14 }}>★</span>
-          <span className="text-sm font-bold" style={{ color: "#111827" }}>
+        <div className="flex items-center gap-1 mb-2">
+          <span style={{ color: "#F59E0B", fontSize: 13 }}>★</span>
+          <span className="text-xs font-bold" style={{ color: "#111827" }}>
             {rating.toFixed(1)}
           </span>
-          <span className="text-sm" style={{ color: "#9CA3AF" }}>({reviewsCnt})</span>
+          <span className="text-xs" style={{ color: "#9CA3AF" }}>({reviewsCnt})</span>
         </div>
 
         {/* Divider */}
-        <div className="mb-3" style={{ height: 1, background: "#F3F4F6" }} />
+        <div className="mb-2" style={{ height: 1, background: "#F3F4F6" }} />
 
         {/* Price + discount */}
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-sm" style={{ color: "#6B7280" }}>от </span>
-            <span className="font-black text-xl" style={{ color: "#111827" }}>{priceBgn}</span>
-            <span className="text-sm font-bold" style={{ color: "#111827" }}> лв.</span>
+        <div className="flex items-center justify-between gap-1">
+          <div className="min-w-0">
+            <span className="text-xs" style={{ color: "#6B7280" }}>от </span>
+            <span className="font-black text-lg md:text-xl" style={{ color: "#111827" }}>{priceBgn}</span>
+            <span className="text-xs font-bold" style={{ color: "#111827" }}> лв.</span>
           </div>
           {discount && (
             <span
-              className="font-black text-sm px-3 py-1 rounded-xl"
+              className="font-black text-xs px-2.5 py-1 rounded-xl shrink-0"
               style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
             >
               -{discount}%

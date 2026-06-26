@@ -122,7 +122,7 @@ function DestinationsContent() {
 
       {/* Grid */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {filtered.map((offer) => (
             <OfferCard key={offer.id} offer={offer} />
           ))}
@@ -145,7 +145,7 @@ export default function DestinationsPage() {
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-blue-100 rounded w-64" />
           <div className="h-32 bg-blue-100 rounded-2xl" />
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="h-64 bg-blue-100 rounded-2xl" />
             ))}
