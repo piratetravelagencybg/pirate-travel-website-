@@ -81,26 +81,33 @@ export default async function HomePage() {
 
       {/* ── ПОПУЛЯРНИ ОФЕРТИ ──────────────────────────────────── */}
       <section className="mt-14 max-w-6xl mx-auto px-5">
-        {/* Header row */}
-        <div className="flex items-end justify-between mb-7">
-          <div>
-            <p
-              className="text-xs font-black uppercase tracking-[0.15em] mb-2"
-              style={{ color: "#D4A017" }}
-            >
-              Подбрани за теб
-            </p>
-            <h2 className="text-2xl md:text-3xl font-black" style={{ color: "#111827" }}>
-              Популярни оферти
-            </h2>
+        {/* Header */}
+        <div className="mb-7">
+          <p className="text-xs font-black uppercase tracking-[0.15em] mb-2" style={{ color: "#D4A017" }}>
+            Подбрани за теб
+          </p>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-3">
+                <h2 className="text-2xl md:text-3xl font-black" style={{ color: "#111827" }}>
+                  Популярни оферти
+                </h2>
+                {/* Sparkle decoration */}
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="shrink-0 hidden sm:block">
+                  <path d="M16 4 L17.5 14.5 L28 16 L17.5 17.5 L16 28 L14.5 17.5 L4 16 L14.5 14.5 Z" fill="#D4A017" opacity="0.9"/>
+                  <circle cx="26" cy="8" r="2" fill="#D4A017" opacity="0.5"/>
+                  <circle cx="28" cy="14" r="1" fill="#D4A017" opacity="0.3"/>
+                </svg>
+              </div>
+              <Link
+                href="/destinacii"
+                className="inline-flex items-center gap-1 text-sm font-semibold mt-1 hover:opacity-70 transition-opacity"
+                style={{ color: "#5A8AB0" }}
+              >
+                Виж всички оферти <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
-          <Link
-            href="/destinacii"
-            className="hidden md:flex items-center gap-1.5 text-sm font-semibold transition-colors hover:opacity-70"
-            style={{ color: "#5A8AB0" }}
-          >
-            Виж всички оферти <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
 
         {/* Desktop 4-col grid */}
@@ -110,24 +117,13 @@ export default async function HomePage() {
           ))}
         </div>
 
-        {/* Mobile horizontal scroll */}
-        <div className="md:hidden flex gap-4 overflow-x-auto scrollbar-hide pb-3 -mx-5 px-5">
+        {/* Mobile horizontal scroll — big cards, peek next */}
+        <div className="md:hidden flex gap-4 overflow-x-auto scrollbar-hide pb-4 -mx-5 px-5 snap-x snap-mandatory">
           {offers.map(offer => (
-            <div key={offer.id} className="w-[68vw] shrink-0">
+            <div key={offer.id} className="w-[78vw] shrink-0 snap-start">
               <OfferCard offer={offer} />
             </div>
           ))}
-        </div>
-
-        {/* Mobile "see all" link */}
-        <div className="mt-5 text-center md:hidden">
-          <Link
-            href="/destinacii"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold"
-            style={{ color: "#5A8AB0" }}
-          >
-            Виж всички оферти <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
       </section>
 

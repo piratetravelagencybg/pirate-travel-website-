@@ -2,25 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Heart } from "lucide-react";
+import { MapPin, Moon, Bus, Plane, Heart } from "lucide-react";
 import type { Offer } from "@/lib/types";
 
-const COUNTRY_FLAGS: Record<string, string> = {
-  "Гърция":     "🇬🇷",
-  "Турция":     "🇹🇷",
-  "Сърбия":     "🇷🇸",
-  "Румъния":    "🇷🇴",
-  "Черна Гора": "🇲🇪",
-  "Австрия":    "🇦🇹",
-  "Франция":    "🇫🇷",
-  "Италия":     "🇮🇹",
-  "Испания":    "🇪🇸",
-  "Хърватия":   "🇭🇷",
-  "Египет":     "🇪🇬",
-  "ОАЕ":        "🇦🇪",
+const TRANSPORT_ICON: Record<string, React.ReactNode> = {
+  bus:    <Bus    className="w-3.5 h-3.5" />,
+  flight: <Plane  className="w-3.5 h-3.5" />,
+  mixed:  <Plane  className="w-3.5 h-3.5" />,
 };
 
-const TRANSPORT_LABELS: Record<string, string> = {
+const TRANSPORT_LABEL: Record<string, string> = {
   bus:    "Автобус",
   flight: "Самолет",
   mixed:  "All Inclusive",
@@ -28,90 +19,93 @@ const TRANSPORT_LABELS: Record<string, string> = {
 
 export default function OfferCard({ offer }: { offer: Offer }) {
   const priceBgn    = offer.price_bgn ?? Math.round(offer.price_eur * 1.96);
-  const flag        = COUNTRY_FLAGS[offer.country] ?? "🌍";
-  const transport   = TRANSPORT_LABELS[offer.transport] ?? offer.transport;
-  const rating      = offer.rating ?? 4.8;
+  const transport   = TRANSPORT_LABEL[offer.transport]  ?? offer.transport;
+  const tIcon       = TRANSPORT_ICON[offer.transport]   ?? null;
+  const rating      = offer.rating        ?? 4.8;
   const reviewsCnt  = offer.reviews_count ?? 120;
   const discount    = offer.discount;
   const nights      = offer.duration_days ?? 0;
-  const nightsLabel = nights > 0 ? `${nights} ночувки` : "";
 
   return (
     <Link
       href={`/destinacii/${offer.slug}`}
-      className="group block bg-white rounded-2xl overflow-hidden flex-shrink-0 transition-all duration-200 hover:-translate-y-1"
-      style={{
-        boxShadow: "0 2px 16px rgba(7,26,46,0.07)",
-        border: "1px solid rgba(189,213,238,0.5)",
-        width: "100%",
-      }}
-      onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 36px rgba(7,26,46,0.15)"}
-      onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 16px rgba(7,26,46,0.07)"}
+      className="group block bg-white rounded-2xl overflow-hidden w-full transition-all duration-300 hover:-translate-y-1"
+      style={{ boxShadow: "0 4px 24px rgba(7,26,46,0.09)" }}
     >
-      {/* Photo */}
-      <div className="relative h-44 overflow-hidden">
+      {/* ── IMAGE ──────────────────────────────────────────── */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
         <Image
           src={offer.image_url ?? "/images/hero.png"}
-          alt={`${offer.destination} — ${offer.title}`}
+          alt={offer.destination}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 70vw, 25vw"
+          sizes="(max-width: 768px) 80vw, 25vw"
           loading="lazy"
         />
+
+        {/* Heart button */}
         <button
           onClick={e => e.preventDefault()}
-          className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-          style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(4px)" }}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:scale-110"
+          style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(6px)" }}
           aria-label="Добави в любими"
         >
           <Heart className="w-4 h-4" style={{ color: "#9CA3AF" }} />
         </button>
+
+        {/* Country pill — bottom left */}
+        <div
+          className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+          style={{ background: "rgba(7,26,46,0.72)", backdropFilter: "blur(6px)" }}
+        >
+          <MapPin className="w-3 h-3 text-white opacity-80" />
+          <span className="text-white text-[11px] font-bold uppercase tracking-wider">
+            {offer.country}
+          </span>
+        </div>
       </div>
 
-      {/* Content */}
+      {/* ── CONTENT ────────────────────────────────────────── */}
       <div className="p-4">
-        {/* Country + flag */}
-        <div className="flex items-center gap-1 mb-1 text-xs" style={{ color: "#9CA3AF" }}>
-          <MapPin className="w-3 h-3 shrink-0" />
-          <span>{flag} {offer.country}</span>
-        </div>
-
-        {/* Destination */}
-        <h3 className="font-bold text-[15px] mb-1 leading-snug" style={{ color: "#111827" }}>
+        {/* City name */}
+        <h3 className="font-black text-xl mb-1.5 leading-tight" style={{ color: "#111827" }}>
           {offer.destination}
         </h3>
 
-        {/* Duration • Transport */}
-        {nightsLabel && (
-          <p className="text-xs mb-2.5" style={{ color: "#9CA3AF" }}>
-            {nightsLabel} • {transport}
-          </p>
+        {/* Nights • Transport */}
+        {nights > 0 && (
+          <div className="flex items-center gap-1.5 mb-2" style={{ color: "#6B7280" }}>
+            <Moon className="w-3.5 h-3.5" />
+            <span className="text-sm">{nights} нощувки</span>
+            <span className="mx-0.5 opacity-40">•</span>
+            {tIcon}
+            <span className="text-sm">{transport}</span>
+          </div>
         )}
 
         {/* Stars */}
-        <div className="flex items-center gap-1 mb-3">
-          <span className="text-yellow-400 text-xs">⭐</span>
-          <span className="text-xs font-semibold" style={{ color: "#374151" }}>
+        <div className="flex items-center gap-1.5 mb-3">
+          <span style={{ color: "#F59E0B", fontSize: 14 }}>★</span>
+          <span className="text-sm font-bold" style={{ color: "#111827" }}>
             {rating.toFixed(1)}
           </span>
-          <span className="text-xs" style={{ color: "#9CA3AF" }}>({reviewsCnt})</span>
+          <span className="text-sm" style={{ color: "#9CA3AF" }}>({reviewsCnt})</span>
         </div>
 
-        {/* Price + discount badge */}
+        {/* Divider */}
+        <div className="mb-3" style={{ height: 1, background: "#F3F4F6" }} />
+
+        {/* Price + discount */}
         <div className="flex items-center justify-between">
           <div>
-            <span className="font-black text-sm" style={{ color: "#111827" }}>
-              от {priceBgn} лв.
-            </span>
+            <span className="text-sm" style={{ color: "#6B7280" }}>от </span>
+            <span className="font-black text-xl" style={{ color: "#111827" }}>{priceBgn}</span>
+            <span className="text-sm font-bold" style={{ color: "#111827" }}> лв.</span>
           </div>
           {discount && (
             <span
-              className="text-xs font-black px-2 py-0.5"
-              style={{
-                background: "#D4A017",
-                color: "#1C1208",
-                borderRadius: "6px",
-              }}
+              className="font-black text-sm px-3 py-1 rounded-xl"
+              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
             >
               -{discount}%
             </span>
