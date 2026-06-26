@@ -91,7 +91,7 @@ export default function Navbar() {
             PIRATE
           </span>
           <span
-            className="block font-bold text-[8px] tracking-[0.38em] uppercase -mt-0.5"
+            className="block font-bold text-[8px] tracking-[0.38em] uppercase mt-[1px]"
             style={solid
               ? { background: "linear-gradient(135deg,#C07810,#F5C842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }
               : { color: "rgba(255,255,255,0.75)" }
