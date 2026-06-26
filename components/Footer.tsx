@@ -1,157 +1,156 @@
-import { Fragment } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/destinacii",        label: "Оферти"            },
-  { href: "/za-nas",            label: "За нас"            },
+  { href: "/",                  label: "Начало"            },
+  { href: "/destinacii",        label: "Дестинации"        },
   { href: "/personalni-oferti", label: "Персонална оферта" },
+  { href: "/za-nas",            label: "За нас"            },
   { href: "/kontakti",          label: "Контакти"          },
 ];
 
-const SOCIAL = [
-  { href: "https://www.facebook.com/piratetravelagency",  Icon: Facebook,  label: "Facebook"  },
-  { href: "https://www.instagram.com/piratetravelagency", Icon: Instagram, label: "Instagram" },
+const CONTACTS = [
+  { Icon: Phone,  text: "0877 121 209",                          href: "tel:+359877121209"                     },
+  { Icon: Mail,   text: "piratetravelagencybg@gmail.com",        href: "mailto:piratetravelagencybg@gmail.com" },
+  { Icon: MapPin, text: "бул. Свети Димитър Солунски 17, Благоевград", href: null                             },
+  { Icon: Clock,  text: "Пон–Пет: 09:00–18:00",                 href: null                                    },
 ];
 
-const CONTACTS = [
-  { Icon: Phone,  text: "0877 121 209",                   href: "tel:+359877121209"                      },
-  { Icon: Mail,   text: "piratetravelagencybg@gmail.com", href: "mailto:piratetravelagencybg@gmail.com" },
-  { Icon: MapPin, text: "Благоевград",                    href: null                                     },
-];
+const colTitle = {
+  display: "block",
+  fontSize: "0.65rem",
+  fontWeight: 800,
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.18em",
+  color: "#D4A017",
+  marginBottom: "1.1rem",
+};
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden">
+    <footer style={{ background: "#0F0F0F", borderTop: "3px solid #D4A017" }}>
 
-      {/* ── OCEAN BACKGROUND IMAGE + OVERLAY ── */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url('/images/footer-ocean.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      {/* ── MAIN GRID ── */}
+      <div className="max-w-6xl mx-auto px-6 pt-12 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-center md:text-left">
 
-      {/* Gradient overlay: white top → waves visible → dark bottom for text */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.15) 32%, rgba(10,20,40,0.72) 62%, rgba(10,20,40,0.97) 100%)",
-        }}
-      />
+          {/* LEFT — Logo + tagline + social */}
+          <div className="flex flex-col items-center md:items-start">
+            <Link href="/" className="leading-none mb-3">
+              <span
+                className="block"
+                style={{ color: "#FFFFFF", fontWeight: 800, fontSize: "1.2rem", letterSpacing: "0.05em" }}
+              >
+                PIRATE
+              </span>
+              <span
+                className="block mt-[1px] text-center md:text-left"
+                style={{ color: "#D4A017", fontWeight: 600, fontSize: "0.7rem", letterSpacing: "0.2em" }}
+              >
+                TRAVEL
+              </span>
+            </Link>
 
-      {/* ── CONTENT (sits above overlays) ── */}
-      <div className="relative z-10 pt-52 md:pt-60 pb-0">
-        <div className="max-w-3xl mx-auto px-5 text-center">
+            <p
+              className="mb-6 italic"
+              style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", marginTop: 8, maxWidth: 240 }}
+            >
+              Превръщаме пътуването в приключение
+            </p>
 
-          {/* Logo */}
-          <div className="mb-3">
-            <Image
-              src="/images/logo-full.png"
-              alt="Pirate Travel Agency"
-              width={110}
-              height={110}
-              className="mx-auto object-contain"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-          </div>
-
-          {/* Tagline */}
-          <p
-            className="mb-6 italic"
-            style={{
-              fontFamily: "Georgia, 'Times New Roman', serif",
-              color: "rgba(255,255,255,0.7)",
-              fontSize: "0.9rem",
-            }}
-          >
-            Превръщаме пътуването в приключение
-          </p>
-
-          {/* Social icons */}
-          <div className="flex justify-center gap-3 mb-7">
-            {SOCIAL.map(({ href, Icon, label }) => (
+            {/* Social icons — inline SVG so currentColor works for hover */}
+            <div className="flex gap-3">
+              {/* Facebook */}
               <a
-                key={label}
-                href={href}
+                href="https://www.facebook.com/piratetravelagency"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label}
-                className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 hover:border-[#D4A017] hover:text-[#D4A017] text-white"
-                style={{
-                  border: "1.5px solid rgba(255,255,255,0.3)",
-                  background: "rgba(255,255,255,0.08)",
-                }}
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 hover:border-[#D4A017] text-white/60 hover:text-[#D4A017]"
+                style={{ background: "transparent" }}
               >
-                <Icon className="w-[18px] h-[18px]" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
               </a>
-            ))}
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/piratetravelagency"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 hover:border-[#D4A017] text-white/60 hover:text-[#D4A017]"
+                style={{ background: "transparent" }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
-          {/* Nav links */}
-          <nav className="flex flex-wrap justify-center items-center gap-0 mb-6">
-            {NAV_LINKS.map(({ href, label }, i) => (
-              <Fragment key={href}>
-                <Link
-                  href={href}
-                  className="transition-colors duration-200 hover:text-white px-3 py-1"
-                  style={{
-                    color: "rgba(255,255,255,0.6)",
-                    fontSize: "0.8rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    fontWeight: 500,
-                  }}
-                >
-                  {label}
-                </Link>
-                {i < NAV_LINKS.length - 1 && (
-                  <span style={{ color: "#D4A017", fontWeight: 300 }}>|</span>
-                )}
-              </Fragment>
-            ))}
-          </nav>
+          {/* MIDDLE — Navigation */}
+          <div className="flex flex-col items-center md:items-start">
+            <span style={colTitle}>Навигация</span>
+            <ul className="flex flex-col gap-2.5">
+              {NAV_LINKS.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="transition-colors duration-200 hover:text-white"
+                    style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.88rem" }}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Contact strip */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 mb-8">
-            {CONTACTS.map(({ Icon, text, href }, i) => (
-              <Fragment key={text}>
-                {i > 0 && (
-                  <span className="hidden md:block mx-3" style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-                )}
-                <div className="flex items-center gap-1.5">
-                  <Icon style={{ width: 12, height: 12, color: "#D4A017", flexShrink: 0 }} />
+          {/* RIGHT — Contacts */}
+          <div className="flex flex-col items-center md:items-start">
+            <span style={colTitle}>Контакти</span>
+            <ul className="flex flex-col gap-3">
+              {CONTACTS.map(({ Icon, text, href }) => (
+                <li key={text} className="flex items-start gap-2.5 text-left">
+                  <Icon
+                    style={{ width: 14, height: 14, color: "#D4A017", flexShrink: 0, marginTop: 2 }}
+                  />
                   {href ? (
                     <a
                       href={href}
-                      className="transition-colors duration-200 hover:text-white"
-                      style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem" }}
+                      className="transition-colors duration-200 hover:text-white leading-snug"
+                      style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.85rem" }}
                     >
                       {text}
                     </a>
                   ) : (
-                    <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem" }}>{text}</span>
+                    <span className="leading-snug" style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.85rem" }}>
+                      {text}
+                    </span>
                   )}
-                </div>
-              </Fragment>
-            ))}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* ── BOTTOM BAR ── */}
-        <div
-          className="py-4 pb-24 md:pb-4 text-center"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
-        >
-          <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.72rem" }}>
-            © 2025 Pirate Travel Agency — Благоевград, България
-          </p>
-        </div>
+      {/* ── SEPARATOR ── */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div style={{ height: 1, background: "rgba(255,255,255,0.08)" }} />
+      </div>
+
+      {/* ── BOTTOM BAR ── */}
+      <div
+        className="py-4 pb-24 md:pb-4 text-center"
+        style={{ background: "rgba(0,0,0,0.3)" }}
+      >
+        <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.72rem" }}>
+          © 2025 Pirate Travel Agency — Благоевград, България
+        </p>
       </div>
     </footer>
   );
