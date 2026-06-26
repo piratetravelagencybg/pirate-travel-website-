@@ -1,126 +1,122 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { Send } from "lucide-react";
 
 export default function NewsletterBanner() {
-  const [email,   setEmail]   = useState("");
-  const [agreed,  setAgreed]  = useState(false);
-  const [status,  setStatus]  = useState<"idle" | "success" | "error">("idle");
+  const [email,  setEmail]  = useState("");
+  const [agreed, setAgreed] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim() || !agreed) {
-      setStatus("error");
-      return;
-    }
+    if (!email.trim() || !agreed) { setStatus("error"); return; }
     setStatus("success");
     setEmail("");
+    setAgreed(false);
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-5 my-16">
+    <section className="px-5 my-16">
       <div
-        className="relative rounded-2xl overflow-hidden px-8 py-12 md:py-14"
-        style={{ background: "#071A2E" }}
+        className="max-w-6xl mx-auto rounded-3xl overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #0A2340 0%, #071A2E 60%, #0D2A1A 100%)",
+          boxShadow: "0 20px 60px rgba(7,26,46,0.35)",
+        }}
       >
-        {/* Subtle background image */}
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src="/images/hero.png"
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="1200px"
-            aria-hidden
-          />
-        </div>
-        {/* Left tint */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, rgba(7,26,46,0.85) 0%, rgba(7,26,46,0.4) 100%)" }}
-        />
+        <div className="px-8 py-12 md:px-14 md:py-14">
+          {/* ── CONTENT ── */}
+          <div className="max-w-xl mx-auto text-center">
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-10">
+            {/* Icon */}
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6"
+              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)" }}
+            >
+              <Send className="w-6 h-6" style={{ color: "#071A2E" }} />
+            </div>
 
-          {/* Left text */}
-          <div className="flex-1">
+            {/* Heading */}
             <h2 className="text-2xl md:text-3xl font-black text-white mb-3 leading-tight">
-              Готов за следващото{" "}
+              Ексклузивни оферти{" "}
               <span
                 className="italic"
                 style={{
-                  background: "linear-gradient(135deg, #C07810 0%, #F5C842 100%)",
+                  background: "linear-gradient(135deg,#C07810,#F5C842)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                 }}
               >
-                приключение?
+                директно при теб
               </span>
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-              Абонирай се за нашия бюлетин и получавай ексклузивни оферти и вдъхновение за пътешествия.
+            <p className="text-sm mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
+              Абонирай се и получавай специални намаления и нови оферти преди всички останали.
             </p>
-          </div>
 
-          {/* Right form */}
-          <div className="w-full md:w-auto md:min-w-[340px] shrink-0">
+            {/* ── FORM ── */}
             {status === "success" ? (
-              <div className="text-center py-4">
-                <p className="text-xl mb-1">✅</p>
-                <p className="font-bold text-white text-sm">Успешно се абонирахте!</p>
-                <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>
-                  Ще получавате нашите оферти.
+              <div
+                className="rounded-2xl px-6 py-8 text-center"
+                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+              >
+                <p className="text-3xl mb-2">✅</p>
+                <p className="font-black text-white text-base">Успешно се абонирахте!</p>
+                <p className="text-sm mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  Очаквайте нашите оферти скоро.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="flex gap-2 mb-3">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={e => { setEmail(e.target.value); setStatus("idle"); }}
-                    placeholder="Имейл адрес"
-                    className="flex-1 rounded-xl px-4 py-3 text-sm outline-none"
-                    style={{
-                      background: "rgba(255,255,255,0.1)",
-                      border: status === "error" && !email
-                        ? "1px solid rgba(239,68,68,0.6)"
-                        : "1px solid rgba(255,255,255,0.15)",
-                      color: "#FFFFFF",
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="font-black px-5 py-3 rounded-xl text-sm shrink-0 transition-opacity hover:opacity-90"
-                    style={{
-                      background: "linear-gradient(135deg, #C07810 0%, #F5C842 100%)",
-                      color: "#071A2E",
-                    }}
-                  >
-                    Абонирай се →
-                  </button>
-                </div>
-                <label className="flex items-start gap-2 cursor-pointer">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                {/* Email input */}
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => { setEmail(e.target.value); setStatus("idle"); }}
+                  placeholder="Твоят имейл адрес"
+                  className="w-full rounded-2xl px-5 py-4 text-sm outline-none"
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    border: status === "error" && !email
+                      ? "1.5px solid rgba(239,68,68,0.7)"
+                      : "1.5px solid rgba(255,255,255,0.12)",
+                    color: "#FFFFFF",
+                  }}
+                />
+
+                {/* Submit button — full width */}
+                <button
+                  type="submit"
+                  className="w-full font-black py-4 rounded-2xl text-sm transition-opacity hover:opacity-90 flex items-center justify-center gap-2"
+                  style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+                >
+                  <Send className="w-4 h-4" />
+                  Абонирай се
+                </button>
+
+                {/* Checkbox */}
+                <label className="flex items-start gap-2.5 cursor-pointer text-left mt-1">
                   <input
                     type="checkbox"
                     checked={agreed}
                     onChange={e => setAgreed(e.target.checked)}
-                    className="mt-0.5 shrink-0 accent-yellow-400"
+                    className="mt-0.5 shrink-0 w-4 h-4 accent-yellow-400"
                   />
-                  <span className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  <span className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
                     Съгласявам се с{" "}
-                    <span className="underline cursor-pointer" style={{ color: "rgba(255,255,255,0.75)" }}>
+                    <span className="underline" style={{ color: "rgba(255,255,255,0.7)" }}>
                       общите условия
                     </span>{" "}
                     и политиката за поверителност.
                   </span>
                 </label>
+
+                {/* Error message */}
                 {status === "error" && (
-                  <p className="text-xs mt-2" style={{ color: "rgba(239,68,68,0.9)" }}>
-                    Моля попълнете имейл и приемете условията.
+                  <p className="text-xs text-center" style={{ color: "rgba(239,68,68,0.9)" }}>
+                    {!email ? "Моля въведи имейл адрес." : "Приеми условията, за да продължиш."}
                   </p>
                 )}
               </form>
