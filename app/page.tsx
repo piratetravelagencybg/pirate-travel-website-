@@ -129,58 +129,75 @@ export default async function HomePage() {
       </section>
 
       {/* ── ПРЕДИМСТВА ───────────────────────────────────────── */}
-      <section className="mt-16 px-5" style={{ background: "#071A2E" }}>
-        <div className="max-w-6xl mx-auto py-16">
+      <section className="mt-16 px-5 py-16" style={{ background: "#FEFCF8" }}>
+        <div className="max-w-2xl mx-auto md:max-w-6xl">
+
           {/* Header */}
           <div className="text-center mb-12">
-            <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: "#D4A017" }}>
-              Защо Pirate Travel?
-            </p>
-            <h2 className="text-2xl md:text-3xl font-black text-white">
-              Пътуването е лесно с нас
-            </h2>
-          </div>
+            {/* — Защо да изберете нас — */}
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="h-px w-8" style={{ background: "#D4A017" }} />
+              <span className="text-sm font-semibold" style={{ color: "#D4A017" }}>
+                Защо да изберете нас
+              </span>
+              <div className="h-px w-8" style={{ background: "#D4A017" }} />
+            </div>
 
-          {/* 4 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {FEATURES.map(({ Icon, title, desc }, i) => (
-              <div
-                key={title}
-                className="relative rounded-2xl p-6 flex flex-col gap-4 overflow-hidden group transition-transform duration-300 hover:-translate-y-1"
+            <h2 className="text-2xl md:text-3xl font-black leading-tight mb-4" style={{ color: "#0D2240" }}>
+              Пътувайте уверено{" "}
+              <span
+                className="italic"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.09)",
+                  background: "linear-gradient(135deg,#C07810,#F5C842)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
-                {/* Big faint number */}
-                <span
-                  className="absolute top-3 right-4 font-black select-none pointer-events-none"
-                  style={{ fontSize: 56, lineHeight: 1, color: "rgba(255,255,255,0.04)" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                с Pirate Travel
+              </span>
+            </h2>
 
-                {/* Icon circle */}
+            <p className="text-sm leading-relaxed max-w-md mx-auto" style={{ color: "#9CA3AF" }}>
+              Комбинираме експертиза, технологии и лично отношение,
+              за да ви осигурим най-доброто изживяване.
+            </p>
+          </div>
+
+          {/* 2×2 cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {FEATURES.map(({ Icon, title, desc }) => (
+              <div
+                key={title}
+                className="flex flex-col items-center text-center p-5 rounded-2xl transition-transform duration-300 hover:-translate-y-1"
+                style={{
+                  background: "#FFFFFF",
+                  border: "1px solid #F0EDE8",
+                  boxShadow: "0 2px 16px rgba(7,26,46,0.05)",
+                }}
+              >
+                {/* Warm beige icon circle */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: "linear-gradient(135deg,#C07810,#F5C842)" }}
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-4 shrink-0"
+                  style={{ background: "rgba(212,160,23,0.1)" }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: "#071A2E" }} />
+                  <Icon className="w-7 h-7" style={{ color: "#C07810" }} strokeWidth={1.5} />
                 </div>
 
-                {/* Text */}
-                <div>
-                  <h3 className="font-black text-base text-white mb-1.5">{title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-                    {desc}
-                  </p>
-                </div>
+                {/* Title */}
+                <h3 className="font-black text-sm mb-2 leading-snug" style={{ color: "#0D2240" }}>
+                  {title}
+                </h3>
 
-                {/* Gold bottom accent */}
+                {/* Gold underline under title */}
                 <div
-                  className="absolute bottom-0 left-6 right-6 h-px"
-                  style={{ background: "linear-gradient(90deg, transparent, rgba(212,160,23,0.5), transparent)" }}
+                  className="mb-3"
+                  style={{ width: 28, height: 2, background: "linear-gradient(135deg,#C07810,#F5C842)", borderRadius: 99 }}
                 />
+
+                <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
