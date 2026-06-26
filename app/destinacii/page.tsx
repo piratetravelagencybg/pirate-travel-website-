@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -52,7 +52,7 @@ function DestinationsContent() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-24 pb-10" style={{ background: "#F8FBFD", minHeight: "100vh" }}>
+    <div className="max-w-6xl mx-auto px-4 pt-24 pb-10" style={{ background: "#FAFAF8", minHeight: "100vh" }}>
       <h1 className="text-2xl md:text-3xl font-black mb-6" style={{ color: "#0D2240" }}>
         Всички <span style={goldText}>дестинации</span>
       </h1>
@@ -70,7 +70,7 @@ function DestinationsContent() {
           placeholder="Търси дестинация..."
           className="w-full text-sm px-4 py-3 rounded-xl outline-none mb-3"
           style={{
-            background: "#F8FBFD",
+            background: "#FAFAF8",
             border: "1px solid #BDD5EE",
             color: "#0D2240",
           }}
@@ -86,7 +86,7 @@ function DestinationsContent() {
               style={
                 country === c
                   ? { background: "linear-gradient(135deg, #0D2240 0%, #1A6EBD 100%)", color: "#FFFFFF" }
-                  : { background: "#F8FBFD", color: "#1E4A7A", border: "1px solid #BDD5EE" }
+                  : { background: "#FAFAF8", color: "#1E4A7A", border: "1px solid #BDD5EE" }
               }
             >
               {c}
@@ -104,7 +104,7 @@ function DestinationsContent() {
               style={
                 budget === b.value
                   ? { background: "rgba(26,110,189,0.12)", color: "#1A6EBD", border: "1px solid rgba(26,110,189,0.35)" }
-                  : { background: "#F8FBFD", color: "#1E4A7A", border: "1px solid #BDD5EE" }
+                  : { background: "#FAFAF8", color: "#1E4A7A", border: "1px solid #BDD5EE" }
               }
             >
               {b.label}
@@ -141,7 +141,7 @@ function DestinationsContent() {
 export default function DestinationsPage() {
   return (
     <Suspense fallback={
-      <div className="max-w-6xl mx-auto px-4 pt-24 pb-10" style={{ background: "#F8FBFD", minHeight: "100vh" }}>
+      <div className="max-w-6xl mx-auto px-4 pt-24 pb-10" style={{ background: "#FAFAF8", minHeight: "100vh" }}>
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-blue-100 rounded w-64" />
           <div className="h-32 bg-blue-100 rounded-2xl" />

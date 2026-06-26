@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram } from "lucide-react";
@@ -21,7 +21,7 @@ export default function ContactPage() {
   }
 
   const inputStyle: React.CSSProperties = {
-    background: "#F8FBFD",
+    background: "#FAFAF8",
     border: "1px solid #BDD5EE",
     color: "#0D2240",
   };
@@ -83,7 +83,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm transition-all hover:border-[#1A6EBD]"
-                style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#1E4A7A" }}
+                style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#1E4A7A" }}
               >
                 <Facebook className="w-4 h-4 text-blue-500" />
                 Facebook
@@ -93,7 +93,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm transition-all hover:border-[#1A6EBD]"
-                style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#1E4A7A" }}
+                style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#1E4A7A" }}
               >
                 <Instagram className="w-4 h-4 text-pink-500" />
                 Instagram

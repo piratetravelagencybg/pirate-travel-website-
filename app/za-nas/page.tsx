@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Award, Users, Clock, MapPin, Phone, Mail, ArrowRight } from "lucide-react";
@@ -18,7 +18,7 @@ const goldText: React.CSSProperties = {
 
 export default function AboutPage() {
   return (
-    <div style={{ background: "#F8FBFD" }}>
+    <div style={{ background: "#FAFAF8" }}>
 
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end pb-16">
@@ -254,7 +254,7 @@ export default function AboutPage() {
             <Link
               href="/kontakti"
               className="font-semibold text-center px-7 py-3.5 rounded-2xl text-sm border transition-colors"
-              style={{ borderColor: "rgba(255,255,255,0.15)", color: "#F8FBFD" }}
+              style={{ borderColor: "rgba(255,255,255,0.15)", color: "#FAFAF8" }}
             >
               Свържи се с нас
             </Link>

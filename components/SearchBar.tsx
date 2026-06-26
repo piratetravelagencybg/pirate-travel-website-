@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -130,14 +130,14 @@ export default function SearchBar() {
                     type="button"
                     onClick={() => setTravelers(Math.max(1, travelers - 1))}
                     className="w-9 h-9 rounded-full font-bold text-lg flex items-center justify-center"
-                    style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240" }}
+                    style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240" }}
                   >−</button>
                   <span className="font-black text-2xl" style={{ color: "#0D2240" }}>{travelers}</span>
                   <button
                     type="button"
                     onClick={() => setTravelers(Math.min(50, travelers + 1))}
                     className="w-9 h-9 rounded-full font-bold text-lg flex items-center justify-center"
-                    style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240" }}
+                    style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240" }}
                   >+</button>
                 </div>
                 <button
@@ -182,7 +182,7 @@ export default function SearchBar() {
                 style={
                   dest === d
                     ? { background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }
-                    : { background: "#F0F7FF", color: "#1E4A7A", border: "1px solid #BDD5EE" }
+                    : { background: "#F4F4F2", color: "#1E4A7A", border: "1px solid #BDD5EE" }
                 }
               >
                 {d}
@@ -191,7 +191,7 @@ export default function SearchBar() {
           </div>
 
           {/* Destination text input */}
-          <div className="flex items-center gap-3 px-5 py-3" style={{ borderTop: "1px solid #F0F7FF" }}>
+          <div className="flex items-center gap-3 px-5 py-3" style={{ borderTop: "1px solid #F4F4F2" }}>
             <MapPin className="w-4 h-4 shrink-0" style={{ color: "#D4A017" }} />
             <input
               type="text"
@@ -204,7 +204,7 @@ export default function SearchBar() {
           </div>
 
           {/* Period + Travelers row */}
-          <div className="flex" style={{ borderTop: "1px solid #F0F7FF" }}>
+          <div className="flex" style={{ borderTop: "1px solid #F4F4F2" }}>
             {/* Period */}
             <div className="relative flex-1">
               <button
@@ -228,7 +228,7 @@ export default function SearchBar() {
               />
             </div>
 
-            <div className="w-px my-2" style={{ background: "#F0F7FF" }} />
+            <div className="w-px my-2" style={{ background: "#F4F4F2" }} />
 
             {/* Travelers */}
             <div className="flex items-center gap-3 px-5 py-3">
@@ -238,7 +238,7 @@ export default function SearchBar() {
                   type="button"
                   onClick={() => setTravelers(Math.max(1, travelers - 1))}
                   className="w-7 h-7 rounded-full font-bold"
-                  style={{ background: "#F0F7FF", color: "#0D2240", border: "1px solid #BDD5EE" }}
+                  style={{ background: "#F4F4F2", color: "#0D2240", border: "1px solid #BDD5EE" }}
                 >−</button>
                 <span className="font-bold text-sm w-4 text-center" style={{ color: "#0D2240" }}>
                   {travelers}
@@ -247,7 +247,7 @@ export default function SearchBar() {
                   type="button"
                   onClick={() => setTravelers(Math.min(50, travelers + 1))}
                   className="w-7 h-7 rounded-full font-bold"
-                  style={{ background: "#F0F7FF", color: "#0D2240", border: "1px solid #BDD5EE" }}
+                  style={{ background: "#F4F4F2", color: "#0D2240", border: "1px solid #BDD5EE" }}
                 >+</button>
               </div>
             </div>

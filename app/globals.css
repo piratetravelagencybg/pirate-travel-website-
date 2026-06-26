@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,7 @@
   --gold: #E8A020;
   --gold-dark: #C07810;
   --gold-bright: #F5C842;
-  --bg-primary: #F8FBFD;
+  --bg-primary: #FAFAF8;
   --bg-card: #FFFFFF;
   --bg-dark: #071A2E;
   --border: #BDD5EE;
@@ -22,7 +22,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: #F8FBFD;
+  background-color: #FAFAF8;
   color: #0D2240;
   font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +32,7 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: #F8FBFD; }
+::-webkit-scrollbar-track { background: #FAFAF8; }
 ::-webkit-scrollbar-thumb { background: rgba(26,110,189,0.35); border-radius: 4px; }
 
 /* Hide scrollbar for horizontal scroll */

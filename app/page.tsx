@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
 import OfferCard from "@/components/OfferCard";
@@ -75,7 +75,7 @@ export default async function HomePage() {
   }
 
   return (
-    <div style={{ background: "#F8FBFD" }}>
+    <div style={{ background: "#FAFAF8" }}>
       <Hero />
       <SearchBar />
 

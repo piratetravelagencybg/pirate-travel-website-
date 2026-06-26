@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PersonalOfferWizard from "@/components/PersonalOfferWizard";
 import { Compass } from "lucide-react";
 
@@ -17,7 +17,7 @@ const goldText: React.CSSProperties = {
 
 export default function PersonalOffersPage() {
   return (
-    <div style={{ background: "#F8FBFD" }}>
+    <div style={{ background: "#FAFAF8" }}>
 
       {/* ── HERO ─────────────────────────────────────── */}
       <section

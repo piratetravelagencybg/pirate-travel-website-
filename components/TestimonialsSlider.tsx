@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
@@ -77,7 +77,7 @@ export default function TestimonialsSlider() {
   const t = testimonials[current];
 
   return (
-    <section className="py-10 px-4" style={{ background: "#F8FBFD" }}>
+    <section className="py-10 px-4" style={{ background: "#FAFAF8" }}>
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-7">

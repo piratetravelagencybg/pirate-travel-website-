@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Check, Phone } from "lucide-react";
@@ -11,7 +11,7 @@ interface BookingFormProps {
 }
 
 const inputStyle: React.CSSProperties = {
-  background: "#F8FBFD",
+  background: "#FAFAF8",
   border: "1px solid #BDD5EE",
   color: "#0D2240",
 };

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useCallback } from "react";
 import { saveInquiry } from "@/lib/supabase";
@@ -167,7 +167,7 @@ function SelectCard({
       onClick={onClick}
       className="relative flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-all duration-150 w-full"
       style={{
-        background: selected ? "#F8FBFD" : "#FFFFFF",
+        background: selected ? "#FAFAF8" : "#FFFFFF",
         border: selected ? "2px solid #1A6EBD" : "1px solid #BDD5EE",
         boxShadow: selected ? "0 2px 12px rgba(26,110,189,0.15)" : "none",
         WebkitTapHighlightColor: "transparent",
@@ -381,7 +381,7 @@ export default function PersonalOfferWizard() {
             onChange={e => setForm(p => ({ ...p, sights: e.target.value }))}
             placeholder="Например: исторически замъци, плажове, планински пейзажи, местна кухня..."
             rows={4} className="w-full text-sm px-4 py-3 rounded-xl outline-none resize-none"
-            style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240" }} />
+            style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240" }} />
         </>
       );
 
@@ -423,7 +423,7 @@ export default function PersonalOfferWizard() {
                 onClick={() => setForm(p => ({ ...p, dateType: opt.value }))}
                 className="flex flex-col items-center gap-2 p-3 rounded-xl transition-all"
                 style={{
-                  background: form.dateType === opt.value ? "#F8FBFD" : "#FFFFFF",
+                  background: form.dateType === opt.value ? "#FAFAF8" : "#FFFFFF",
                   border: form.dateType === opt.value ? "2px solid #1A6EBD" : "1px solid #BDD5EE",
                 }}>
                 <span className="text-2xl leading-none">{opt.icon}</span>
@@ -439,14 +439,14 @@ export default function PersonalOfferWizard() {
                 <input type="date" value={form.dateFrom}
                   onChange={e => setForm(p => ({ ...p, dateFrom: e.target.value }))}
                   className="w-full text-sm px-3 py-2.5 rounded-xl outline-none"
-                  style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240", colorScheme: "light" }} />
+                  style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240", colorScheme: "light" }} />
               </div>
               <div>
                 <label className="block text-xs font-bold mb-1.5 uppercase tracking-wide" style={{ color: "#5A8AB0" }}>Дата на връщане</label>
                 <input type="date" value={form.dateTo}
                   onChange={e => setForm(p => ({ ...p, dateTo: e.target.value }))}
                   className="w-full text-sm px-3 py-2.5 rounded-xl outline-none"
-                  style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240", colorScheme: "light" }} />
+                  style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240", colorScheme: "light" }} />
               </div>
             </div>
           )}
@@ -504,7 +504,7 @@ export default function PersonalOfferWizard() {
                 onClick={() => setForm(p => ({ ...p, budget: b.value }))}
                 className="flex items-center gap-4 p-4 rounded-xl text-left transition-all"
                 style={{
-                  background: form.budget === b.value ? "#F8FBFD" : "#FFFFFF",
+                  background: form.budget === b.value ? "#FAFAF8" : "#FFFFFF",
                   border: "1px solid #BDD5EE",
                   borderLeft: form.budget === b.value ? "4px solid #1A6EBD" : "1px solid #BDD5EE",
                   boxShadow: form.budget === b.value ? "0 2px 12px rgba(26,110,189,0.12)" : "none",
@@ -541,7 +541,7 @@ export default function PersonalOfferWizard() {
                   onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))}
                   placeholder={f.placeholder}
                   className="w-full text-sm px-4 py-3 rounded-xl outline-none"
-                  style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240" }} />
+                  style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240" }} />
               </div>
             ))}
             <div>
@@ -552,7 +552,7 @@ export default function PersonalOfferWizard() {
                 onChange={e => setForm(p => ({ ...p, comments: e.target.value }))}
                 placeholder="Специални изисквания, въпроси..."
                 rows={3} className="w-full text-sm px-4 py-3 rounded-xl outline-none resize-none"
-                style={{ background: "#F8FBFD", border: "1px solid #BDD5EE", color: "#0D2240" }} />
+                style={{ background: "#FAFAF8", border: "1px solid #BDD5EE", color: "#0D2240" }} />
             </div>
           </div>
           <p className="text-xs mt-3" style={{ color: "#5A8AB0" }}>🔒 Не споделяме данните ви с никого.</p>

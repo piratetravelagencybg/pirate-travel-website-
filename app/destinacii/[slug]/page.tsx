@@ -92,7 +92,7 @@ export default async function OfferDetailPage({
         </Link>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 pb-24" style={{ background: "#F8FBFD" }}>
+      <div className="max-w-6xl mx-auto px-4 pb-24" style={{ background: "#FAFAF8" }}>
         <div className="md:grid md:grid-cols-3 md:gap-8">
           {/* Main content */}
           <div className="md:col-span-2">
