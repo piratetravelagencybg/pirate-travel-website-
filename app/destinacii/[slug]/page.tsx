@@ -69,8 +69,8 @@ export default async function OfferDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOffer) }}
       />
 
-      {/* Hero image */}
-      <div className="relative h-72 md:h-96 mt-20">
+      {/* Hero image — -mt-20 cancels layout pt-20 so image starts at top */}
+      <div className="relative h-72 md:h-96 -mt-20">
         <Image
           src={imageUrl}
           alt={`${offer.title} — групова екскурзия с Pirate Travel Agency`}
@@ -171,10 +171,10 @@ export default async function OfferDetailPage({
         </div>
       </div>
 
-      {/* Mobile sticky bar */}
+      {/* Mobile sticky bar — bottom-[92px] clears the BottomNav pill (bottom-5 + 62px height) */}
       <div
-        className="fixed bottom-16 left-0 right-0 z-30 md:hidden backdrop-blur-md px-4 py-3"
-        style={{ background: "rgba(239,247,255,0.97)", borderTop: "1px solid #BDD5EE" }}
+        className="fixed left-0 right-0 z-30 md:hidden backdrop-blur-md px-4 py-3"
+        style={{ bottom: 92, background: "rgba(255,255,255,0.97)", borderTop: "1px solid #E5EFF8" }}
       >
         <div className="flex items-center gap-3">
           <div>
