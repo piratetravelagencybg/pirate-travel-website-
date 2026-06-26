@@ -190,27 +190,25 @@ export default function Navbar() {
                     href={href}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm transition-all"
                     style={{
-                      color:      active ? "#071A2E" : "#374151",
-                      background: active ? "rgba(7,26,46,0.06)" : "transparent",
+                      color:      active ? "#071A2E" : "#4B5563",
+                      background: active ? "rgba(7,26,46,0.07)" : "transparent",
                       fontWeight: active ? 700 : 500,
                     }}
                   >
-                    {/* Icon box */}
+                    {/* Icon box — navy always, white icon when active */}
                     <span
                       className="shrink-0 flex items-center justify-center rounded-xl"
                       style={{
                         width: 32,
                         height: 32,
-                        background: active
-                          ? "linear-gradient(135deg,#C07810,#F5C842)"
-                          : "#F5F0E8",
+                        background: active ? "#071A2E" : "rgba(7,26,46,0.08)",
                       }}
                     >
                       <Icon
                         style={{
                           width: 15,
                           height: 15,
-                          color: active ? "#071A2E" : "#C07810",
+                          color: active ? "#FFFFFF" : "#071A2E",
                         }}
                       />
                     </span>
