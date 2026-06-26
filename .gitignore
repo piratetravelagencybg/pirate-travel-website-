@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+
+# next.js build
+/.next/
+/out/
+
+# env files (съдържат тайни ключове!)
+.env*.local
+.env
+
+# claude code
+.claude/
+
+# vercel
+.vercel
+
+# old reference images (not used by site)
+images/
+
+# misc
+.DS_Store
+Thumbs.db
+*.pem
+npm-debug.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.vercel
+server/
+server/.env
