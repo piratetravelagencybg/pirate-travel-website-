@@ -9,6 +9,7 @@ import { getOffers, getMockOffers } from "@/lib/supabase";
 import {
   Shield, Tag, Headphones, Plane,
   Globe, Map, Star, ArrowRight,
+  MapPin, Heart, Zap,
 } from "lucide-react";
 
 export const revalidate = 3600;
@@ -205,61 +206,105 @@ export default async function HomePage() {
       </section>
 
       {/* ── ЗА НАС TEASER ────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-5 mt-20">
-        <div className="grid md:grid-cols-2 gap-0 rounded-3xl overflow-hidden" style={{ boxShadow: "0 12px 48px rgba(7,26,46,0.12)" }}>
+      <section className="px-5 mt-20">
+        <div
+          className="max-w-md mx-auto md:max-w-lg rounded-3xl overflow-hidden"
+          style={{ boxShadow: "0 12px 48px rgba(7,26,46,0.12)", background: "#FFFFFF" }}
+        >
+          {/* Photo collage */}
+          <div className="relative h-64 md:h-72" style={{ background: "#F2EBE0" }}>
+            {/* Main photo — left */}
+            <div className="absolute top-3 left-3 bottom-3" style={{ right: "37%" }}>
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/santorini.png"
+                  alt="Гърция — групова екскурзия"
+                  fill
+                  className="object-cover"
+                  sizes="220px"
+                  loading="lazy"
+                />
+              </div>
+            </div>
 
-          {/* Image */}
-          <div className="relative min-h-[300px] md:min-h-[420px]">
-            <Image
-              src="/images/agency-office.png"
-              alt="Pirate Travel Agency офис"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(7,26,46,0.3), rgba(7,26,46,0.1))" }} />
-            {/* Badge */}
+            {/* Secondary photo — top right */}
+            <div className="absolute top-3 right-3" style={{ left: "65%", bottom: "30%" }}>
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-md">
+                <Image
+                  src="/images/clients-beach.jpg"
+                  alt="Доволни клиенти"
+                  fill
+                  className="object-cover"
+                  sizes="130px"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Gold anchor badge */}
             <div
-              className="absolute bottom-5 left-5 px-4 py-2 rounded-full text-xs font-black text-white"
-              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+              className="absolute z-10 flex items-center justify-center rounded-full shadow-xl"
+              style={{
+                width: 44,
+                height: 44,
+                background: "linear-gradient(135deg,#C07810,#F5C842)",
+                color: "#071A2E",
+                fontSize: 22,
+                bottom: "28%",
+                left: "63%",
+                transform: "translate(-50%, 50%)",
+              }}
             >
-              🏴‍☠️ От 2018 година
+              ⚓
             </div>
           </div>
 
-          {/* Text */}
-          <div className="flex flex-col justify-center px-8 py-10 md:px-10" style={{ background: "#FFFFFF" }}>
-            <p className="text-xs font-black uppercase tracking-[0.18em] mb-3" style={{ color: "#D4A017" }}>
-              Кои сме ние
+          {/* Content */}
+          <div className="px-6 pt-6 pb-8">
+            <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-2" style={{ color: "#D4A017" }}>
+              ЗА PIRATE TRAVEL
             </p>
-            <h2 className="text-2xl md:text-3xl font-black mb-4 leading-tight" style={{ color: "#111827" }}>
-              Твоят надежден партньор за незабравими пътешествия
+            <h2 className="text-2xl font-black mb-3 leading-tight" style={{ color: "#111827" }}>
+              Пътувания,<br />
+              които се помнят
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Pirate Travel Agency е туристическа агенция от Благоевград с опит в организирането на групови екскурзии до Гърция, Турция, Сърбия и много други дестинации. Нашият екип се грижи за всеки детайл — от резервацията до прибирането у дома.
+            <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+              Pirate Travel Agency е туристическа агенция от Благоевград, специализирана в организирането на групови екскурзии с душа — незабравими преживявания на достъпни цени.
             </p>
 
-            {/* Stats */}
-            <div className="flex gap-8 mb-8">
+            {/* 3 mini features */}
+            <div className="flex gap-3 mb-6">
               {[
-                { num: "2300+", label: "доволни клиенти" },
-                { num: "6+",    label: "години опит" },
-                { num: "30+",   label: "дестинации" },
-              ].map(({ num, label }) => (
-                <div key={label}>
-                  <p className="font-black text-xl" style={{ color: "#111827" }}>{num}</p>
-                  <p className="text-xs" style={{ color: "#9CA3AF" }}>{label}</p>
+                { Icon: MapPin, label: "Подбрани дестинации" },
+                { Icon: Heart,  label: "Лично отношение" },
+                { Icon: Zap,    label: "Бърза комуникация" },
+              ].map(({ Icon, label }) => (
+                <div key={label} className="flex flex-col items-center gap-1.5 flex-1 text-center">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: "#FEF9EC", border: "1.5px solid rgba(212,160,23,0.3)" }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: "#C07810" }} />
+                  </div>
+                  <span className="text-[11px] font-semibold leading-tight" style={{ color: "#374151" }}>{label}</span>
                 </div>
               ))}
             </div>
 
+            {/* CTA */}
             <Link
               href="/za-nas"
-              className="inline-flex items-center gap-2 font-black text-sm px-6 py-3.5 rounded-2xl self-start transition-opacity hover:opacity-90"
-              style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+              className="flex items-center justify-center gap-2 font-black text-sm py-3.5 rounded-2xl transition-opacity hover:opacity-90 mb-3"
+              style={{ background: "#071A2E", color: "#FFFFFF" }}
             >
               Научи повече за нас <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/destinacii"
+              className="block text-center text-sm font-semibold"
+              style={{ color: "#9CA3AF" }}
+            >
+              Виж офертите
             </Link>
           </div>
         </div>
