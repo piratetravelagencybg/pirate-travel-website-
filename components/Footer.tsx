@@ -1,9 +1,28 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { Facebook, Instagram, Phone, Mail, MapPin, Clock } from "lucide-react";
 
-const goldText: React.CSSProperties = {
-  background: "linear-gradient(135deg, #C07810 0%, #F5C842 100%)",
+const NAV_LINKS = [
+  { href: "/",                  label: "Начало"             },
+  { href: "/destinacii",        label: "Дестинации"         },
+  { href: "/personalni-oferti", label: "Персонална оферта"  },
+  { href: "/za-nas",            label: "За нас"             },
+  { href: "/kontakti",          label: "Контакти"           },
+];
+
+const CONTACT_ITEMS = [
+  { Icon: Phone,   text: "0877 121 209",                   href: "tel:+359877121209" },
+  { Icon: Mail,    text: "piratetravelagencybg@gmail.com", href: "mailto:piratetravelagencybg@gmail.com" },
+  { Icon: MapPin,  text: 'бул. „Свети Димитър Солунски" 17, Благоевград', href: null },
+  { Icon: Clock,   text: "Пон–Пет: 09:00–18:00",          href: null },
+];
+
+const SOCIAL = [
+  { href: "https://www.facebook.com/piratetravelagency",  Icon: Facebook,  label: "Facebook"  },
+  { href: "https://www.instagram.com/piratetravelagency", Icon: Instagram, label: "Instagram" },
+];
+
+const goldGrad: React.CSSProperties = {
+  background: "linear-gradient(135deg,#C07810,#F5C842)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
@@ -11,98 +30,125 @@ const goldText: React.CSSProperties = {
 
 export default function Footer() {
   return (
-    <footer
-      className="pt-12 pb-6 hidden md:block"
-      style={{ background: "#071A2E", borderTop: "1px solid rgba(255,255,255,0.08)" }}
-    >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-          {/* Logo + about */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image src="/images/logo.png" alt="Pirate Travel logo" width={40} height={40} className="object-contain" />
-              <span className="font-bold text-xl" style={goldText}>Pirate Travel Agency</span>
+    <footer style={{ background: "#1C1208" }}>
+      <div className="max-w-6xl mx-auto px-5 pt-12 pb-24 md:pb-8">
+
+        {/* ── 3 COLUMNS ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-10 text-center md:text-left">
+
+          {/* LEFT — Logo + description + social */}
+          <div className="flex flex-col items-center md:items-start">
+            <Link href="/" className="leading-none mb-5 text-center md:text-left">
+              <span className="block font-black text-[17px] tracking-[0.22em] uppercase" style={goldGrad}>
+                PIRATE
+              </span>
+              <span
+                className="block font-bold text-[10px] tracking-[0.38em] uppercase mt-[1px]"
+                style={{ color: "rgba(253,246,232,0.45)" }}
+              >
+                TRAVEL
+              </span>
             </Link>
-            <p className="text-sm leading-relaxed mb-4 max-w-xs" style={{ color: "#5A8AB0" }}>
-              Туристическа агенция за организирани групови екскурзии от
-              Благоевград. Над 10 години опит, стотици доволни клиенти.
+
+            <p className="text-sm leading-relaxed mb-6 max-w-[260px]" style={{ color: "rgba(253,246,232,0.55)" }}>
+              Туристическа агенция от Благоевград, специализирана в организирането на незабравими групови екскурзии.
             </p>
+
+            {/* Social icons */}
             <div className="flex gap-3">
-              <a
-                href="https://www.facebook.com/piratetravelagency"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-[#1A6EBD] hover:text-white"
-                style={{ background: "rgba(255,255,255,0.06)", color: "#5A8AB0" }}
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.instagram.com/piratetravelagency"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full flex items-center justify-center transition-colors hover:bg-[#1A6EBD] hover:text-white"
-                style={{ background: "rgba(255,255,255,0.06)", color: "#5A8AB0" }}
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
+              {SOCIAL.map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border border-white/20 hover:border-[#D4A017] text-white/50 hover:text-[#D4A017]"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h3 className="font-bold text-sm mb-4 uppercase tracking-wider" style={{ color: "#F8FBFD" }}>Навигация</h3>
-            <ul className="space-y-2 text-sm" style={{ color: "#5A8AB0" }}>
-              {[
-                { href: "/destinacii", label: "Всички оферти" },
-                { href: "/personalni-oferti", label: "Персонална оферта" },
-                { href: "/za-nas", label: "За нас" },
-                { href: "/kontakti", label: "Контакти" },
-              ].map((link) => (
-                <li key={link.href}>
+          {/* MIDDLE — Navigation */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3
+              className="text-[10px] font-black uppercase tracking-[0.2em] mb-5"
+              style={{ color: "#D4A017" }}
+            >
+              Навигация
+            </h3>
+            <ul className="flex flex-col gap-2.5">
+              {NAV_LINKS.map(({ href, label }) => (
+                <li key={href}>
                   <Link
-                    href={link.href}
-                    className="transition-colors hover:text-[#1A6EBD]"
+                    href={href}
+                    className="text-sm transition-colors duration-200 hover:text-[#D4A017]"
+                    style={{ color: "rgba(253,246,232,0.6)" }}
                   >
-                    {link.label}
+                    {label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="font-bold text-sm mb-4 uppercase tracking-wider" style={{ color: "#F8FBFD" }}>Контакти</h3>
-            <ul className="space-y-3 text-sm" style={{ color: "#5A8AB0" }}>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" style={{ color: "#1A6EBD" }} />
-                <span>Благоевград, България</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 shrink-0" style={{ color: "#1A6EBD" }} />
-                <a href="tel:+359877121209" className="hover:text-[#1A6EBD] transition-colors">
-                  0877 121 209
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 shrink-0" style={{ color: "#1A6EBD" }} />
-                <a href="mailto:piratetravelagencybg@gmail.com" className="hover:text-[#1A6EBD] transition-colors text-xs">
-                  piratetravelagencybg@gmail.com
-                </a>
-              </li>
+          {/* RIGHT — Contact */}
+          <div className="flex flex-col items-center md:items-start">
+            <h3
+              className="text-[10px] font-black uppercase tracking-[0.2em] mb-5"
+              style={{ color: "#D4A017" }}
+            >
+              Контакти
+            </h3>
+            <ul className="flex flex-col gap-3">
+              {CONTACT_ITEMS.map(({ Icon, text, href }) => (
+                <li key={text} className="flex items-start gap-2.5 text-left">
+                  <Icon
+                    className="w-4 h-4 mt-0.5 shrink-0"
+                    style={{ color: "#D4A017", opacity: 0.75 }}
+                  />
+                  {href ? (
+                    <a
+                      href={href}
+                      className="text-sm leading-snug transition-colors duration-200 hover:text-[#D4A017]"
+                      style={{ color: "rgba(253,246,232,0.6)" }}
+                    >
+                      {text}
+                    </a>
+                  ) : (
+                    <span className="text-sm leading-snug" style={{ color: "rgba(253,246,232,0.6)" }}>
+                      {text}
+                    </span>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
+        {/* ── BOTTOM BAR ── */}
         <div
-          className="pt-6 flex flex-col md:flex-row items-center justify-between text-sm"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)", color: "#1E4A7A" }}
+          className="flex flex-col md:flex-row items-center justify-between gap-3 pt-6 text-xs"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.1)", color: "rgba(253,246,232,0.3)" }}
         >
           <p>© 2025 Pirate Travel Agency. Всички права запазени.</p>
-          <p className="mt-2 md:mt-0">Благоевград, България</p>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/obshti-uslovia"
+              className="transition-colors duration-200 hover:text-[#D4A017]"
+            >
+              Общи условия
+            </Link>
+            <span style={{ opacity: 0.4 }}>|</span>
+            <Link
+              href="/poveritelnost"
+              className="transition-colors duration-200 hover:text-[#D4A017]"
+            >
+              Политика за поверителност
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
