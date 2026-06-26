@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Home, Compass, Sparkles, Anchor, ArrowRight } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/destinacii",       label: "Дестинации" },
@@ -13,11 +13,11 @@ const NAV_LINKS = [
 ];
 
 const MOBILE_LINKS = [
-  { href: "/",                  label: "Начало",            emoji: "🏠" },
-  { href: "/destinacii",        label: "Оферти",            emoji: "🌍" },
-  { href: "/personalni-oferti", label: "Персонална оферта", emoji: "✨" },
-  { href: "/za-nas",            label: "За нас",            emoji: "🏴‍☠️" },
-  { href: "/kontakti",          label: "Контакти",          emoji: "📞" },
+  { href: "/",                  label: "Начало",            Icon: Home     },
+  { href: "/destinacii",        label: "Оферти",            Icon: Compass  },
+  { href: "/personalni-oferti", label: "Персонална оферта", Icon: Sparkles },
+  { href: "/za-nas",            label: "За нас",            Icon: Anchor   },
+  { href: "/kontakti",          label: "Контакти",          Icon: Phone    },
 ];
 
 const goldGrad: React.CSSProperties = {
@@ -167,46 +167,71 @@ export default function Navbar() {
 
           {/* Floating dropdown */}
           <div
-            className="absolute right-0 mt-3 w-56 overflow-hidden"
+            className="absolute right-0 mt-3 w-60 overflow-hidden"
             style={{
               background: "#ffffff",
-              borderRadius: 20,
-              boxShadow: "0 16px 48px rgba(7,26,46,0.18)",
-              border: "1px solid rgba(189,213,238,0.5)",
+              borderRadius: 24,
+              boxShadow: "0 20px 60px rgba(7,26,46,0.2), 0 4px 12px rgba(7,26,46,0.08)",
+              border: "1px solid rgba(189,213,238,0.4)",
               transformOrigin: "top right",
-              transform: open ? "scale(1) translateY(0)" : "scale(0.92) translateY(-8px)",
+              transform: open ? "scale(1) translateY(0)" : "scale(0.9) translateY(-10px)",
               opacity: open ? 1 : 0,
               pointerEvents: open ? "all" : "none",
-              transition: "transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease",
+              transition: "transform 0.24s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease",
             }}
           >
-            <div className="p-2">
-              {MOBILE_LINKS.map(link => {
-                const active = pathname === link.href;
+            {/* Links */}
+            <div className="p-2 pt-2.5">
+              {MOBILE_LINKS.map(({ href, label, Icon }) => {
+                const active = pathname === href;
                 return (
                   <Link
-                    key={link.href + link.label}
-                    href={link.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors"
+                    key={href + label}
+                    href={href}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-sm transition-all"
                     style={{
-                      color:      active ? "#1A6EBD" : "#111827",
-                      background: active ? "rgba(26,110,189,0.07)" : "transparent",
+                      color:      active ? "#071A2E" : "#374151",
+                      background: active ? "rgba(7,26,46,0.06)" : "transparent",
                       fontWeight: active ? 700 : 500,
                     }}
                   >
-                    <span className="text-base">{link.emoji}</span>
-                    {link.label}
+                    {/* Icon box */}
+                    <span
+                      className="shrink-0 flex items-center justify-center rounded-xl"
+                      style={{
+                        width: 32,
+                        height: 32,
+                        background: active
+                          ? "linear-gradient(135deg,#C07810,#F5C842)"
+                          : "#F5F0E8",
+                      }}
+                    >
+                      <Icon
+                        style={{
+                          width: 15,
+                          height: 15,
+                          color: active ? "#071A2E" : "#C07810",
+                        }}
+                      />
+                    </span>
+                    {label}
                   </Link>
                 );
               })}
             </div>
+
+            {/* Divider */}
+            <div className="mx-4 mb-2" style={{ height: 1, background: "rgba(7,26,46,0.07)" }} />
+
+            {/* CTA */}
             <div className="px-3 pb-3">
               <Link
                 href="/personalni-oferti"
-                className="block font-black text-center text-sm py-3 rounded-2xl"
+                className="flex items-center justify-center gap-2 font-black text-sm py-3 rounded-2xl transition-opacity hover:opacity-90"
                 style={{ ...goldGrad, color: "#071A2E" }}
               >
-                Запитване за оферта →
+                Запитване за оферта
+                <ArrowRight style={{ width: 14, height: 14 }} />
               </Link>
             </div>
           </div>
