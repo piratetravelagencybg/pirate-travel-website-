@@ -127,25 +127,62 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── ЗАЩО НАС — 4 ИКОНКИ ─────────────────────────────── */}
-      <section className="mt-16 max-w-6xl mx-auto px-5 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {FEATURES.map(({ Icon, title, desc }) => (
-            <div key={title} className="text-center">
+      {/* ── ПРЕДИМСТВА ───────────────────────────────────────── */}
+      <section className="mt-16 px-5" style={{ background: "#071A2E" }}>
+        <div className="max-w-6xl mx-auto py-16">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: "#D4A017" }}>
+              Защо Pirate Travel?
+            </p>
+            <h2 className="text-2xl md:text-3xl font-black text-white">
+              Пътуването е лесно с нас
+            </h2>
+          </div>
+
+          {/* 4 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {FEATURES.map(({ Icon, title, desc }, i) => (
               <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                style={{ background: "rgba(212,160,23,0.1)" }}
+                key={title}
+                className="relative rounded-2xl p-6 flex flex-col gap-4 overflow-hidden group transition-transform duration-300 hover:-translate-y-1"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.09)",
+                }}
               >
-                <Icon className="w-6 h-6" style={{ color: "#D4A017" }} />
+                {/* Big faint number */}
+                <span
+                  className="absolute top-3 right-4 font-black select-none pointer-events-none"
+                  style={{ fontSize: 56, lineHeight: 1, color: "rgba(255,255,255,0.04)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Icon circle */}
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: "linear-gradient(135deg,#C07810,#F5C842)" }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: "#071A2E" }} />
+                </div>
+
+                {/* Text */}
+                <div>
+                  <h3 className="font-black text-base text-white mb-1.5">{title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    {desc}
+                  </p>
+                </div>
+
+                {/* Gold bottom accent */}
+                <div
+                  className="absolute bottom-0 left-6 right-6 h-px"
+                  style={{ background: "linear-gradient(90deg, transparent, rgba(212,160,23,0.5), transparent)" }}
+                />
               </div>
-              <h3 className="font-black text-sm mb-2" style={{ color: "#111827" }}>
-                {title}
-              </h3>
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
-                {desc}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
