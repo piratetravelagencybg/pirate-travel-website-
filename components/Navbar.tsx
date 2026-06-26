@@ -25,13 +25,23 @@ const goldGrad: React.CSSProperties = {
 };
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const pathname        = usePathname();
-  const dropRef         = useRef<HTMLDivElement>(null);
+  const [open,     setOpen]     = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname                = usePathname();
+  const dropRef                 = useRef<HTMLDivElement>(null);
+
+  const isHome = pathname === "/";
+  const solid  = scrolled || !isHome;
 
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  // Close dropdown when clicking outside
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     function handler(e: MouseEvent) {
@@ -42,6 +52,11 @@ export default function Navbar() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
+
+  const linkColor = solid ? "#374151" : "rgba(255,255,255,0.92)";
+  const logoColor = solid
+    ? { background: "linear-gradient(135deg,#C07810,#F5C842)", WebkitBackgroundClip: "text" as const, WebkitTextFillColor: "transparent", backgroundClip: "text" as const }
+    : { color: "#FFFFFF" };
 
   return (
     <header
@@ -54,36 +69,36 @@ export default function Navbar() {
       }}
     >
       <div
-        className="flex items-center h-14 px-4 gap-3"
-        style={{
-          background: "rgba(255,255,255,0.96)",
+        className="flex items-center h-14 px-4 gap-3 transition-all duration-300"
+        style={solid ? {
+          background: "rgba(255,255,255,0.97)",
           backdropFilter: "blur(24px)",
           WebkitBackdropFilter: "blur(24px)",
           borderRadius: 9999,
           boxShadow: "0 4px 32px rgba(7,26,46,0.13), 0 1px 4px rgba(7,26,46,0.06)",
           border: "1px solid rgba(189,213,238,0.55)",
+        } : {
+          background: "rgba(0,0,0,0.08)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          borderRadius: 9999,
+          border: "1px solid rgba(255,255,255,0.15)",
         }}
       >
         {/* Logo */}
         <Link href="/" className="shrink-0 leading-none mr-2">
-          <span
-            className="block font-black text-[14px] tracking-[0.22em] uppercase"
-            style={{
-              background: "linear-gradient(135deg,#C07810,#F5C842)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >PIRATE</span>
+          <span className="block font-black text-[14px] tracking-[0.22em] uppercase" style={logoColor}>
+            PIRATE
+          </span>
           <span
             className="block font-bold text-[8px] tracking-[0.5em] uppercase -mt-0.5"
-            style={{
-              background: "linear-gradient(135deg,#C07810,#F5C842)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >TRAVEL</span>
+            style={solid
+              ? { background: "linear-gradient(135deg,#C07810,#F5C842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }
+              : { color: "rgba(255,255,255,0.75)" }
+            }
+          >
+            TRAVEL
+          </span>
         </Link>
 
         {/* Desktop links */}
@@ -96,12 +111,13 @@ export default function Navbar() {
                 href={link.href}
                 className="px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
                 style={{
-                  color:      active ? "#1A6EBD" : "#374151",
-                  background: active ? "rgba(26,110,189,0.08)" : "transparent",
+                  color:      active ? (solid ? "#1A6EBD" : "#F5C842") : linkColor,
+                  background: active ? (solid ? "rgba(26,110,189,0.08)" : "rgba(255,255,255,0.12)") : "transparent",
                   fontWeight: active ? 700 : 500,
                 }}
                 onMouseEnter={e => {
-                  if (!active) (e.currentTarget as HTMLElement).style.background = "rgba(26,110,189,0.06)";
+                  if (!active) (e.currentTarget as HTMLElement).style.background =
+                    solid ? "rgba(26,110,189,0.06)" : "rgba(255,255,255,0.1)";
                 }}
                 onMouseLeave={e => {
                   if (!active) (e.currentTarget as HTMLElement).style.background = "transparent";
@@ -120,7 +136,7 @@ export default function Navbar() {
         <a
           href="tel:+359877121209"
           className="hidden lg:flex items-center gap-1.5 text-sm font-semibold shrink-0 mr-1"
-          style={{ color: "#374151" }}
+          style={{ color: linkColor }}
         >
           <Phone className="w-3.5 h-3.5" style={{ color: "#D4A017" }} />
           0877 121 209
@@ -135,7 +151,7 @@ export default function Navbar() {
           Запитване →
         </Link>
 
-        {/* Hamburger — mobile & tablet (relative anchor for dropdown) */}
+        {/* Hamburger */}
         <div className="lg:hidden relative" ref={dropRef}>
           <button
             onClick={() => setOpen(!open)}
@@ -171,7 +187,7 @@ export default function Navbar() {
                   <Link
                     key={link.href + link.label}
                     href={link.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors"
                     style={{
                       color:      active ? "#1A6EBD" : "#111827",
                       background: active ? "rgba(26,110,189,0.07)" : "transparent",
@@ -184,8 +200,6 @@ export default function Navbar() {
                 );
               })}
             </div>
-
-            {/* Bottom CTA */}
             <div className="px-3 pb-3">
               <Link
                 href="/personalni-oferti"
