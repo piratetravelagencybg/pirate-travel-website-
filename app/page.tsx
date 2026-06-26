@@ -8,7 +8,7 @@ import NewsletterBanner from "@/components/NewsletterBanner";
 import { getOffers, getMockOffers } from "@/lib/supabase";
 import {
   Shield, Tag, Headphones, Plane,
-  Globe, Map, ThumbsUp, ArrowRight,
+  Globe, Map, Star, ArrowRight,
 } from "lucide-react";
 
 export const revalidate = 3600;
@@ -47,22 +47,22 @@ const WHY_US = [
   {
     Icon: Globe,
     title: "Богат избор от дестинации",
-    desc: "От екзотични острови до европейски градове — имаме нещо за всеки вкус.",
+    desc: "От екзотични острови до европейски градове – имаме нещо за всеки вкус.",
   },
   {
     Icon: Map,
     title: "Персонализирани предложения",
-    desc: "Намираме най-подходящото пътуване според твоите желания и бюджет.",
+    desc: "Намираме най-подходящото пътуване спрямо твоите желания и бюджет.",
   },
   {
     Icon: Headphones,
     title: "Грижовно обслужване",
-    desc: "Нашият екип е на линия от запитването до прибирането у дома — ние сме с теб по всяко стъпка.",
+    desc: "Нашият екип е на линия от запитването до прибирането у дома.",
   },
   {
-    Icon: ThumbsUp,
+    Icon: Star,
     title: "Доволни клиенти",
-    desc: "Хиляди пътешественици вече ни се довериха. Виж техните отзиви и стани един от тях.",
+    desc: "Хиляди пътешественици вече ни се довериха и пътуват отново с нас.",
   },
 ];
 
@@ -252,75 +252,87 @@ export default async function HomePage() {
       <NewsletterBanner />
 
       {/* ── ЗАЩО ДА ИЗБЕРЕШ НАС ──────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-5 pb-20 mt-6">
+      <section className="px-5 pb-20 mt-6 max-w-lg mx-auto md:max-w-6xl">
+
         {/* Header */}
-        <div className="mb-12">
-          <p className="text-xs font-black uppercase tracking-[0.2em] mb-3" style={{ color: "#D4A017" }}>
-            Защо да избереш нас?
-          </p>
-          <h2 className="text-2xl md:text-3xl font-black leading-tight" style={{ color: "#111827" }}>
-            Пътешествия, създадени за теб
+        <div className="text-center mb-10">
+          {/* Compass SVG */}
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" className="mx-auto mb-4">
+            <path d="M18 3 L19.2 16.8 L33 18 L19.2 19.2 L18 33 L16.8 19.2 L3 18 L16.8 16.8 Z" fill="#D4A017" opacity="0.85"/>
+            <circle cx="28" cy="9" r="2" fill="#D4A017" opacity="0.4"/>
+            <circle cx="30" cy="15" r="1" fill="#D4A017" opacity="0.25"/>
+          </svg>
+
+          <h2 className="text-2xl md:text-3xl font-black leading-tight mb-3" style={{ color: "#0D2240" }}>
+            Пътешествия,{" "}
+            <span className="block">
+              създадени{" "}
+              <em
+                className="not-italic"
+                style={{
+                  fontStyle: "italic",
+                  background: "linear-gradient(135deg,#C07810,#F5C842)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >за теб</em>
+            </span>
           </h2>
+
+          {/* Gold underline */}
+          <div className="mx-auto mb-4" style={{ width: 48, height: 3, background: "linear-gradient(135deg,#C07810,#F5C842)", borderRadius: 99 }} />
+
+          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+            Персонално, лесно и вдъхновяващо –<br className="hidden sm:block" />
+            всяко пътуване е изживяване.
+          </p>
         </div>
 
-        {/* Feature rows */}
-        <div className="flex flex-col gap-0">
-          {WHY_US.map(({ Icon, title, desc }, i) => (
+        {/* 2×2 grid with center anchor badge */}
+        <div className="relative grid grid-cols-2 gap-3">
+          {WHY_US.map(({ Icon, title, desc }) => (
             <div
               key={title}
-              className="group flex items-start gap-6 py-7 transition-colors duration-200"
+              className="rounded-2xl p-5 flex flex-col items-center text-center overflow-hidden"
               style={{
-                borderTop: "1px solid #EBEBEB",
-                borderBottom: i === WHY_US.length - 1 ? "1px solid #EBEBEB" : "none",
+                background: "#FFFFFF",
+                border: "1px solid #F0EDE8",
+                boxShadow: "0 2px 12px rgba(7,26,46,0.06)",
               }}
             >
-              {/* Number */}
-              <span
-                className="font-black shrink-0 w-10 text-right leading-none mt-1"
-                style={{ fontSize: 13, color: "#D4A017", letterSpacing: "0.05em" }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
-              {/* Icon */}
+              {/* Blue outline icon circle */}
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110"
-                style={{ background: "linear-gradient(135deg,#C07810,#F5C842)" }}
+                className="w-14 h-14 rounded-full flex items-center justify-center mb-3 shrink-0"
+                style={{ border: "1.5px solid #1A3A5C", background: "transparent" }}
               >
-                <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" style={{ color: "#071A2E" }} />
+                <Icon className="w-6 h-6" style={{ color: "#1A3A5C" }} strokeWidth={1.5} />
               </div>
 
-              {/* Text */}
-              <div className="flex-1 min-w-0">
-                <h3 className="font-black text-base mb-1" style={{ color: "#111827" }}>
-                  {title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                  {desc}
-                </p>
-              </div>
-
-              {/* Arrow on hover */}
-              <ArrowRight
-                className="w-4 h-4 shrink-0 mt-1.5 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
-                style={{ color: "#D4A017" }}
-              />
+              <h3 className="font-black text-sm mb-2 leading-snug" style={{ color: "#0D2240" }}>
+                {title}
+              </h3>
+              <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                {desc}
+              </p>
             </div>
           ))}
-        </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-10 flex items-center justify-between flex-wrap gap-4">
-          <p className="text-sm" style={{ color: "#6B7280" }}>
-            Над <strong style={{ color: "#111827" }}>2300 доволни пътешественици</strong> вече ни се довериха.
-          </p>
-          <Link
-            href="/destinacii"
-            className="inline-flex items-center gap-2 font-black text-sm px-6 py-3 rounded-2xl transition-opacity hover:opacity-90"
-            style={{ background: "linear-gradient(135deg,#C07810,#F5C842)", color: "#071A2E" }}
+          {/* Center gold anchor badge */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center z-10"
+            style={{
+              background: "linear-gradient(135deg,#C07810,#F5C842)",
+              boxShadow: "0 4px 20px rgba(212,160,23,0.45)",
+            }}
           >
-            Разгледай оферти <ArrowRight className="w-4 h-4" />
-          </Link>
+            {/* Anchor SVG */}
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#071A2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="5" r="3"/>
+              <line x1="12" y1="22" x2="12" y2="8"/>
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
+            </svg>
+          </div>
         </div>
       </section>
 
