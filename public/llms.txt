@@ -1,25 +1,21 @@
 # Pirate Travel Agency
+> Туристическа агенция за организирани групови автобусни екскурзии от Благоевград, България.
 
-Туристическа агенция за организирани групови екскурзии от Благоевград, България.
-Специализирани в автобусни пътувания до Гърция, Турция, Сърбия, Румъния и Италия.
+## Оферти
+- Всички дестинации: https://pirate-travel-website-rpwy.vercel.app/destinacii
+- Гърция: https://pirate-travel-website-rpwy.vercel.app/destinacii?country=gartsia
+- Турция: https://pirate-travel-website-rpwy.vercel.app/destinacii?country=turtsia
+- Сърбия: https://pirate-travel-website-rpwy.vercel.app/destinacii?country=sarbia
+- Румъния: https://pirate-travel-website-rpwy.vercel.app/destinacii?country=mania
 
-## Оферти и дестинации
-
-- [Всички дестинации](https://piratetravelagency.com/destinacii)
-- [Гърция](https://piratetravelagency.com/destinacii?q=Гърция)
-- [Турция](https://piratetravelagency.com/destinacii?q=Турция)
-- [Персонална оферта](https://piratetravelagency.com/personalni-oferti)
+## Персонална оферта
+- https://pirate-travel-website-rpwy.vercel.app/personalni-oferti
 
 ## Контакти
-
-- [Контактна страница](https://piratetravelagency.com/kontakti)
-
-## Местоположение
-
-Благоевград, България
+- Телефон: 0877 121 209
+- Имейл: piratetravelagencybg@gmail.com
+- Адрес: бул. Свети Димитър Солунски 17, Благоевград
+- https://pirate-travel-website-rpwy.vercel.app/kontakti
 
 ## За агенцията
-
-Pirate Travel Agency е туристическа агенция с над 10 години опит в
-организирането на групови екскурзии. Предлагаме автобусни пътувания
-до популярни европейски дестинации на достъпни цени.
+Pirate Travel Agency е туристическа агенция от Благоевград с над 10 години опит в организирането на групови екскурзии. Специализирани в автобусни пътувания до Гърция, Турция, Сърбия, Румъния и Италия на достъпни цени.

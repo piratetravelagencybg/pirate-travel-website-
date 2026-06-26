@@ -398,6 +398,103 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-5 mt-20 mb-8">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "От къде тръгват екскурзиите?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Всички наши групови екскурзии тръгват от Благоевград. Точното място на качване е централна автобусна спирка.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Как да резервирам място?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Можете да резервирате онлайн чрез нашата форма за запитване или да се свържете с нас на 0877 121 209.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Какво е включено в цената?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "В цената са включени транспорт с климатизиран автобус, нощувки и закуски според програмата. Допълнителни екскурзии и лични разходи не са включени.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Има ли детски цени?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Да, предлагаме намалени цени за деца до 12 години. Свържете се с нас за конкретна оферта.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
+
+        <p className="text-xs font-black uppercase tracking-[0.18em] mb-2 text-center" style={{ color: "#D4A017" }}>
+          Имаш въпрос?
+        </p>
+        <h2 className="text-2xl md:text-3xl font-black text-center mb-8" style={{ color: "#111827" }}>
+          Често задавани въпроси
+        </h2>
+
+        <div className="flex flex-col gap-3">
+          {[
+            {
+              q: "От къде тръгват екскурзиите?",
+              a: "Всички наши групови екскурзии тръгват от Благоевград. Точното място на качване е централна автобусна спирка.",
+            },
+            {
+              q: "Как да резервирам място?",
+              a: "Можете да резервирате онлайн чрез нашата форма за запитване или да се свържете с нас на 0877 121 209.",
+            },
+            {
+              q: "Какво е включено в цената?",
+              a: "В цената са включени транспорт с климатизиран автобус, нощувки и закуски според програмата. Допълнителни екскурзии и лични разходи не са включени.",
+            },
+            {
+              q: "Има ли детски цени?",
+              a: "Да, предлагаме намалени цени за деца до 12 години. Свържете се с нас за конкретна оферта.",
+            },
+          ].map(({ q, a }) => (
+            <details
+              key={q}
+              className="group rounded-2xl overflow-hidden"
+              style={{ background: "#FFFFFF", border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(7,26,46,0.05)" }}
+            >
+              <summary
+                className="flex items-center justify-between gap-3 px-5 py-4 cursor-pointer font-semibold text-sm list-none"
+                style={{ color: "#111827" }}
+              >
+                {q}
+                <span
+                  className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black transition-transform group-open:rotate-45"
+                  style={{ background: "#071A2E", color: "#FFFFFF" }}
+                >
+                  +
+                </span>
+              </summary>
+              <div className="px-5 pb-5 pt-1 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                {a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
       {/* ── TESTIMONIALS ─────────────────────────────────────── */}
       <TestimonialsSlider />
     </div>

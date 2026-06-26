@@ -42,9 +42,9 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="text-gray-200 text-base md:text-lg mb-8 leading-relaxed max-w-sm opacity-90">
-              Подбрани оферти за Гърция, Турция,<br className="hidden md:block" /> Сърбия и още.
-            </p>
+            <h2 className="text-gray-200 text-base md:text-lg mb-8 leading-relaxed max-w-sm opacity-90 font-normal">
+              Групови екскурзии от Благоевград до Гърция, Турция и Сърбия
+            </h2>
 
             {/* CTAs */}
             <div className="flex items-center flex-wrap gap-3">

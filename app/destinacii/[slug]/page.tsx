@@ -26,13 +26,21 @@ export async function generateMetadata({
   const offer = await getOfferBySlug(slug);
   if (!offer) return { title: "Оферта не е намерена" };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://pirate-travel-website-rpwy.vercel.app";
+  const pageUrl = `${siteUrl}/destinacii/${offer.slug}`;
+  const imageUrl = offer.image_url
+    ? `${siteUrl}${offer.image_url}`
+    : `${siteUrl}/images/hero.png`;
+
   return {
-    title: `${offer.title} | Pirate Travel Agency`,
-    description: `${offer.destination} — ${offer.duration_days} дни от ${offer.price_eur}€. ${offer.description || "Групова екскурзия с Pirate Travel Agency от Благоевград."}`,
+    title: `${offer.title} от Благоевград — ${offer.duration_days} дни | Pirate Travel`,
+    description: `Групова екскурзия ${offer.destination} от Благоевград. ${offer.duration_days} дни от ${offer.price_bgn ?? offer.price_eur} лв. Транспорт с автобус. Запази място онлайн!`,
+    alternates: { canonical: pageUrl },
     openGraph: {
-      title: `${offer.title} | Pirate Travel Agency`,
-      description: `${offer.destination} — ${offer.duration_days} дни от ${offer.price_eur}€`,
-      images: [{ url: offer.image_url || "/images/hero.png" }],
+      title: `${offer.title} от Благоевград — ${offer.duration_days} дни | Pirate Travel`,
+      description: `Групова екскурзия ${offer.destination} от Благоевград. ${offer.duration_days} дни от ${offer.price_bgn ?? offer.price_eur} лв.`,
+      url: pageUrl,
+      images: [{ url: imageUrl, width: 1200, height: 630 }],
     },
   };
 }
@@ -55,10 +63,12 @@ export default async function OfferDetailPage({
     name: offer.title,
     description: offer.description || `Групова екскурзия до ${offer.destination}`,
     touristType: "Group",
+    itinerary: offer.destination,
     offers: {
       "@type": "Offer",
       price: offer.price_eur.toString(),
       priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
     },
   };
 

@@ -26,8 +26,33 @@ export default function ContactPage() {
     color: "#0D2240",
   };
 
+  const localBusiness = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: "Pirate Travel Agency",
+    url: "https://pirate-travel-website-rpwy.vercel.app",
+    telephone: "+359877121209",
+    email: "piratetravelagencybg@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "бул. Свети Димитър Солунски 17",
+      addressLocality: "Благоевград",
+      addressCountry: "BG",
+    },
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "18:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Saturday"], opens: "10:00", closes: "14:00" },
+    ],
+    priceRange: "€€",
+    sameAs: [
+      "https://www.facebook.com/piratetravelagency",
+      "https://www.instagram.com/piratetravelagency",
+    ],
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 pt-24 pb-16" style={{ minHeight: "100vh" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
       <div className="mb-10">
         <span className="text-xs font-bold uppercase tracking-wider" style={{ color: "#1A6EBD" }}>
           Свържи се с нас

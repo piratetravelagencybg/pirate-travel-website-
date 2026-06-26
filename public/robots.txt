@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://piratetravelagency.com/sitemap.xml
+Disallow: /api/
+Sitemap: https://pirate-travel-website-rpwy.vercel.app/sitemap.xml
 
 User-agent: GPTBot
 Allow: /
